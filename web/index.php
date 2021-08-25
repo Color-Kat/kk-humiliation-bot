@@ -28,7 +28,6 @@ $app->post('/bot', function () use ($app) {
             return getenv('VK_CONFIRMATION_CODE');
 
         case 'message_new':
-        case 'message_reply':
 
             $request_params = [
                 'user_id' => $data->object->user_id,
@@ -76,6 +75,8 @@ $app->post('/bot', function () use ($app) {
 
             $random_insult_number = rand(0, count($insults));
 
+            $request_params['message'] = 'ты ' . $insults[$random_insult_number];
+
 
             // if ты or вы in message - send нет, ты
             if ((stripos($data->object->body, 'ты') !== false ||
@@ -92,8 +93,6 @@ $app->post('/bot', function () use ($app) {
                 stripos($data->object->body, 'согласен') !== false ||
                 stripos($data->object->body, 'точно') !== false))
                 $request_params['message'] = 'Вот, то-то же';
-
-            $request_params['message'] = 'ты ' . $insults[$random_insult_number];
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

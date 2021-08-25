@@ -93,10 +93,8 @@ $app->post('/bot', function () use ($app) {
 
             $random_insult_number = rand(0, count($insults));
 
-            $request_params['message'] = array_rand([
-                'ты',
-                'вы'
-            ]) . ' ' . $insults[$random_insult_number];
+            $you = ['ты', 'вы'];
+            $request_params['message'] = $you[array_rand($you)] . ' ' . $insults[$random_insult_number];
 
 
             // if ты or вы in message - send нет, ты
@@ -105,8 +103,9 @@ $app->post('/bot', function () use ($app) {
                 stripos($data->object->body, 'не') !== false ||
                 stripos($data->object->body, 'no') !== false ||
                 stripos($data->object->body, 'иди') !== false ||
-                stripos($data->object->body, 'вы') !== false))
-                $request_params['message'] = array_rand([
+                stripos($data->object->body, 'вы') !== false)) {
+
+                $no_you = [
                     'нет, ты',
                     'кто обзывается, тот сам так называется!',
                     'сам такой',
@@ -119,14 +118,17 @@ $app->post('/bot', function () use ($app) {
                     'нет нет нееееет',
                     'noo',
                     'nope',
-                ]);
+                ];
+
+                $request_params['message'] = $no_you[array_rand($no_you)];
+            }
 
             if ((stripos($data->object->body, 'да') !== false ||
                 stripos($data->object->body, 'ага') !== false ||
                 stripos($data->object->body, 'конечно') !== false ||
                 stripos($data->object->body, 'согласен') !== false ||
-                stripos($data->object->body, 'точно') !== false))
-                $request_params['message'] = array_rand([
+                stripos($data->object->body, 'точно') !== false)) {
+                $yes = [
                     'вот, то-то же',
                     'ага',
                     'конечно',
@@ -141,7 +143,10 @@ $app->post('/bot', function () use ($app) {
                     'я так и думал',
                     'да',
                     'ага',
-                ]);
+                ];
+
+                $request_params['message'] = $yes[array_rand($yes)];
+            }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

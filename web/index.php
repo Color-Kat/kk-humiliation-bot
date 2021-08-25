@@ -28,6 +28,7 @@ $app->post('/bot', function () use ($app) {
             return getenv('VK_CONFIRMATION_CODE');
 
         case 'message_new':
+        case 'message_reply':
 
             $request_params = [
                 'user_id' => $data->object->user_id,
@@ -93,7 +94,6 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = 'Вот, то-то же';
 
             $request_params['message'] = 'ты ' . $insults[$random_insult_number];
-
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

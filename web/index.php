@@ -75,12 +75,24 @@ $app->post('/bot', function () use ($app) {
 
             $random_insult_number = rand(0, count($insults));
 
-            $say_no = (stripos($data->object->body, 'ты') >= 0 ||
-                stripos($data->object->body, 'вы') >= 0);
 
-            $prefix = $say_no ? 'нет, ты' : 'ты';
+            // if ты or вы in message - send нет, ты
+            if ((stripos($data->object->body, 'ты') !== false ||
+                stripos($data->object->body, 'сам') !== false ||
+                stripos($data->object->body, 'не') !== false ||
+                stripos($data->object->body, 'no') !== false ||
+                stripos($data->object->body, 'иди') !== false ||
+                stripos($data->object->body, 'вы') !== false))
+                $request_params['message'] = 'нет, ты';
 
-            $request_params['message'] = $prefix . ' ' . $insults[$random_insult_number];
+            if ((stripos($data->object->body, 'да') !== false ||
+                stripos($data->object->body, 'ага') !== false ||
+                stripos($data->object->body, 'конечно') !== false ||
+                stripos($data->object->body, 'согласен') !== false ||
+                stripos($data->object->body, 'точно') !== false))
+                $request_params['message'] = 'Вот, то-то же';
+
+            $request_params['message'] = 'ты ' . $insults[$random_insult_number];
 
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

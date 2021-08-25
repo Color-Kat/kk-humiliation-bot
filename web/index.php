@@ -31,10 +31,57 @@ $app->post('/bot', function () use ($app) {
 
             $request_params = [
                 'user_id' => $data->object->user_id,
-                'message' => 'Лошара',
+                'message' => 'лошара',
                 'access_token' => getenv('VK_TOKEN'),
                 'v' => '5.80'
             ];
+
+            $insults = [
+                'лох',
+                'лошара',
+                'лашпед',
+                'петух',
+                'петушара',
+                'петя',
+                'собака',
+                'животное',
+                'живатина',
+                'скотина',
+                'леший',
+                'дед',
+                'пердун',
+                'дед-пердун',
+                'запердыш',
+                'засерыш',
+                'урод',
+                'дурак',
+                'дебил',
+                'дебилойд',
+                'уродец',
+                'гад',
+                'падла',
+                'мусор',
+                'тупица',
+                'тупой',
+                'срань',
+                'засранец',
+                'свинья',
+                'жертва оборта',
+                'высер',
+                'сцыкун',
+                'гад ползучий',
+                // '',
+            ];
+
+            $random_insult_number = rand(0, count($insults));
+
+            $say_no = (stripos($data->object->body, 'ты') >= 0 ||
+                stripos($data->object->body, 'вы') >= 0);
+
+            $prefix = $say_no ? 'нет, ты' : 'ты';
+
+            $request_params['message'] = $prefix . ' ' . $insults[$random_insult_number];
+
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

@@ -28,7 +28,17 @@ $app->post('/bot', function () use ($app) {
             return getenv('VK_CONFIRMATION_CODE');
 
         case 'message_new':
-            return 'lox';
+
+            $request_params = [
+                'user_id' => $data->object->from_id,
+                'message' => 'Лошара',
+                'access_token' => getenv('VK_TOKEN'),
+                'v' => '5.80'
+            ];
+
+            file_get_contents('http://api.vk.com/method/messages.send?' . http_build_query($request_params));
+
+            return 'ok';
 
         default:
             # code...

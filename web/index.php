@@ -30,13 +30,13 @@ $app->post('/bot', function () use ($app) {
         case 'message_new':
 
             $request_params = [
-                'user_id' => $data->object->from_id,
+                'user_id' => $data->object->user_id,
                 'message' => 'Лошара',
                 'access_token' => getenv('VK_TOKEN'),
                 'v' => '5.80'
             ];
 
-            file_get_contents('http://api.vk.com/method/messages.send?' . http_build_query($request_params));
+            file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 
             return 'ok';
 

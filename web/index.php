@@ -139,6 +139,7 @@ $app->post('/bot', function () use ($app) {
                     'сто пудов',
                     'да',
                     'так точно',
+                    'точно',
                     'правильно',
                     'вот',
                     'воооот',
@@ -184,7 +185,7 @@ $app->post('/bot', function () use ($app) {
 
             // go away
             if (
-                stripos($data->object->body, 'иди') !== false ||
+                stripos($data->object->body, 'иди ') !== false ||
                 stripos($data->object->body, 'пош') !== false
             ) {
                 $go_away = [

@@ -38,7 +38,14 @@ $app->post('/bot', function () use ($app) {
 
             $insults = [
                 'лох',
+                'лох',
+                'лох',
                 'лошара',
+                'лошара',
+                'лошара',
+                'лошара',
+                'лашпед',
+                'лашпед',
                 'лашпед',
                 'петух',
                 'петушара',
@@ -50,25 +57,35 @@ $app->post('/bot', function () use ($app) {
                 'леший',
                 'дед',
                 'пердун',
+                'пердун',
+                'дед-пердун',
                 'дед-пердун',
                 'запердыш',
                 'засерыш',
                 'урод',
+                'урод',
                 'дурак',
+                'дурак',
+                'дебил',
                 'дебил',
                 'дебилойд',
                 'уродец',
                 'гад',
                 'падла',
+                'падла',
                 'мусор',
                 'тупица',
                 'тупой',
                 'срань',
+                'срань',
+                'засранец',
                 'засранец',
                 'свинья',
                 'жертва оборта',
+                'жертва оборта',
                 'высер',
                 'сцыкун',
+                'гад ползучий',
                 'гад ползучий',
                 'скупердяй',
                 'жадоба',
@@ -85,6 +102,19 @@ $app->post('/bot', function () use ($app) {
                 'паразит',
                 'предатель',
                 'горе',
+                'Олег',
+                'БОМЖ',
+                'БОМЖара',
+                'алкаш',
+                'наркоман',
+                'нарик',
+                'торчок',
+                'абобус',
+                'абобус',
+                'абобус',
+                'даша корейка',
+                '',
+                '',
                 '',
                 '',
                 '',
@@ -95,33 +125,6 @@ $app->post('/bot', function () use ($app) {
 
             $you = ['ты', 'вы'];
             $request_params['message'] = $you[array_rand($you)] . ' ' . $insults[$random_insult_number];
-
-
-            // if ты or вы in message - send нет, ты
-            if ((stripos($data->object->body, 'ты') !== false ||
-                stripos($data->object->body, 'сам') !== false ||
-                stripos($data->object->body, 'не') !== false ||
-                stripos($data->object->body, 'no') !== false ||
-                stripos($data->object->body, 'иди') !== false ||
-                stripos($data->object->body, 'вы') !== false)) {
-
-                $no_you = [
-                    'нет, ты',
-                    'кто обзывается, тот сам так называется!',
-                    'сам такой',
-                    'иди к черту!',
-                    'не обижай меня',
-                    'неа)',
-                    'ты-тыт-тыты-тыт-ыты-тыт-ыты-ыт',
-                    'гыыы',
-                    'нет, вы',
-                    'нет нет нееееет',
-                    'noo',
-                    'nope',
-                ];
-
-                $request_params['message'] = $no_you[array_rand($no_you)];
-            }
 
             if ((stripos($data->object->body, 'да') !== false ||
                 stripos($data->object->body, 'ага') !== false ||
@@ -146,6 +149,59 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $yes[array_rand($yes)];
+            }
+
+            // if ты or вы in message - send нет, ты
+            if ((stripos($data->object->body, 'ты') !== false ||
+                stripos($data->object->body, 'сам') !== false ||
+                stripos($data->object->body, 'не') !== false ||
+                stripos($data->object->body, 'no') !== false ||
+                stripos($data->object->body, 'вы') !== false)) {
+
+                $no_you = [
+                    'нет, ты',
+                    'нет, ты',
+                    'нет, ты',
+                    'нет, ты',
+                    'кто обзывается, тот сам так называется!',
+                    'сам такой',
+                    'иди к черту!',
+                    'иди к черту!',
+                    'не обижай меня',
+                    'неа)',
+                    'неа)',
+                    'неа)',
+                    'ты-ты-ты',
+                    'гыыы',
+                    'нет, вы',
+                    'нет, вы',
+                    'нет нет нееееет',
+                    'нет нет нееееет',
+                ];
+
+                $request_params['message'] = $no_you[array_rand($no_you)];
+            }
+
+            // go away
+            if (
+                stripos($data->object->body, 'иди') !== false ||
+                stripos($data->object->body, 'пош') !== false
+            ) {
+                $go_away = [
+                    'сам иди',
+                    'сам иди',
+                    'после вас',
+                    'после тебя',
+                    'неа, сам иди',
+                    'пошел к черту',
+                    'не груби мне!',
+                    'пошел нафиг',
+                    'у меня нет ног(',
+                    'сам иди',
+                    'уходи',
+                ];
+
+                $request_params['message'] = $go_away[array_rand($go_away)];
             }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

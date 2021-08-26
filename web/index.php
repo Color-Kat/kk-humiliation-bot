@@ -113,18 +113,14 @@ $app->post('/bot', function () use ($app) {
                 'абобус',
                 'абобус',
                 'даша корейка',
-                '',
-                '',
-                '',
-                '',
-                '',
-                '',
+                // '',
             ];
 
             $random_insult_number = rand(0, count($insults));
 
-            $you = ['ты', 'вы'];
-            $request_params['message'] = $you[array_rand($you)] . ' ' . $insults[$random_insult_number];
+            // $you = ['ты', 'вы'];
+            // $request_params['message'] = $you[array_rand($you)] . ' ' . $insults[$random_insult_number];
+            $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
             if ((stripos($data->object->body, 'да') !== false ||
                 stripos($data->object->body, 'ага') !== false ||
@@ -174,8 +170,6 @@ $app->post('/bot', function () use ($app) {
                     'неа)',
                     'ты-ты-ты',
                     'гыыы',
-                    'нет, вы',
-                    'нет, вы',
                     'нет нет нееееет',
                     'нет нет нееееет',
                 ];

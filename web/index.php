@@ -181,8 +181,8 @@ $app->post('/bot', function () use ($app) {
             }
 
             // if user say "you" - send "no, you"
-            if ((stripos($data->object->body, 'ты ') !== false ||
-                stripos($data->object->body, 'сам ') !== false ||
+            if ((stripos($data->object->body, 'ты') !== false ||
+                stripos($data->object->body, 'сам') !== false ||
                 stripos($data->object->body, 'не') !== false ||
                 stripos($data->object->body, 'no') !== false ||
                 stripos($data->object->body, 'пид') !== false ||
@@ -194,7 +194,7 @@ $app->post('/bot', function () use ($app) {
                 stripos($data->object->body, 'скот') !== false ||
                 stripos($data->object->body, 'скат') !== false ||
                 stripos($data->object->body, 'уе') !== false ||
-                stripos($data->object->body, 'вы ') !== false)) {
+                stripos($data->object->body, 'вы') !== false)) {
 
                 $no_you = [
                     'нет, ты',
@@ -290,10 +290,13 @@ $app->post('/bot', function () use ($app) {
                 stripos($data->object->body, 'дора ответ') !== false ||
                 stripos($data->object->body, 'гея ответ') !== false
             ) {
-                $request_params['message'] = 'гея оргумент';
+                $request_params['message'] = 'гея аргумент';
             }
             if (
-                stripos($data->object->body, 'дор обноружен') !== false ||
+                stripos($data->object->body, 'дор обнаружен') !== false ||
+                stripos($data->object->body, 'дор обнаружен') !== false ||
+                // for written errors
+                stripos($data->object->body, 'гей обноружен') !== false ||
                 stripos($data->object->body, 'гей обноружен') !== false
             ) {
                 $request_params['message'] = 'я засекречен, твой анал не вечен)';
@@ -310,6 +313,13 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $end_of[array_rand($end_of)];
+            }
+
+            if (
+                stripos($data->object->body, 'пиз') !== false
+            ) {
+
+                $request_params['message'] = 'остроумно';
             }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

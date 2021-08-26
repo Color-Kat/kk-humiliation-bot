@@ -28,7 +28,7 @@ $app->post('/bot', function () use ($app) {
             return getenv('VK_CONFIRMATION_CODE');
 
         case 'message_new':
-
+            // create response array
             $request_params = [
                 'user_id' => $data->object->user_id,
                 'message' => 'лошара',
@@ -36,6 +36,7 @@ $app->post('/bot', function () use ($app) {
                 'v' => '5.80'
             ];
 
+            // insults list
             $insults = [
                 'лох',
                 'лох',
@@ -116,12 +117,14 @@ $app->post('/bot', function () use ($app) {
                 // '',
             ];
 
+            // send random insult
             $random_insult_number = rand(0, count($insults));
 
             // $you = ['ты', 'вы'];
             // $request_params['message'] = $you[array_rand($you)] . ' ' . $insults[$random_insult_number];
             $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
+            // if user say yes
             if ((stripos($data->object->body, 'да') !== false ||
                 stripos($data->object->body, 'ага') !== false ||
                 stripos($data->object->body, 'конечно') !== false ||
@@ -148,7 +151,7 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $yes[array_rand($yes)];
             }
 
-            // if ты or вы in message - send нет, ты
+            // if user say "you" - send "no, you"
             if ((stripos($data->object->body, 'ты') !== false ||
                 stripos($data->object->body, 'сам') !== false ||
                 stripos($data->object->body, 'не') !== false ||
@@ -161,7 +164,6 @@ $app->post('/bot', function () use ($app) {
                     'нет, ты',
                     'нет, ты',
                     'кто обзывается, тот сам так называется!',
-                    'сам такой',
                     'иди к черту!',
                     'иди к черту!',
                     'не обижай меня',
@@ -197,6 +199,30 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $go_away[array_rand($go_away)];
+            }
+
+            if (
+                strlen($data->object->body) > 99
+            ) {
+                $shut_up = [
+                    'заткнись',
+                    'замолчи',
+                    'умолкни',
+                    'рот закрой',
+                    'задолбал',
+                    'иди к черту',
+                    'молааать!',
+                    'заткнись',
+                    'умолкни',
+                    'не пиши мне',
+                    'заткнись и не объясняй мне ничего, я бот!',
+                    'молчать!',
+                    'заткнись',
+                    'иди к черту!',
+                    'задолбал!',
+                ];
+
+                $request_params['message'] = $shut_up[array_rand($shut_up)];
             }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

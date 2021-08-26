@@ -154,8 +154,8 @@ $app->post('/bot', function () use ($app) {
             $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
             // if user say yes
-            if ((stripos($data->object->body, 'да ') !== false ||
-                stripos($data->object->body, 'ага ') !== false ||
+            if ((stripos($data->object->body, 'да') !== false ||
+                stripos($data->object->body, 'ага') !== false ||
                 stripos($data->object->body, 'конечно') !== false ||
                 stripos($data->object->body, 'согласен') !== false ||
                 stripos($data->object->body, 'точно') !== false)) {
@@ -294,9 +294,9 @@ $app->post('/bot', function () use ($app) {
             }
             if (
                 stripos($data->object->body, 'дор обнаружен') !== false ||
-                stripos($data->object->body, 'дор обнаружен') !== false ||
+                stripos($data->object->body, 'гей обнаружен') !== false ||
                 // for written errors
-                stripos($data->object->body, 'гей обноружен') !== false ||
+                stripos($data->object->body, 'дор обноружен') !== false ||
                 stripos($data->object->body, 'гей обноружен') !== false
             ) {
                 $request_params['message'] = 'я засекречен, твой анал не вечен)';

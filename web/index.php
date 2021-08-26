@@ -144,6 +144,7 @@ $app->post('/bot', function () use ($app) {
                 'ЧЕРТопоЛОХ',
                 'черт',
                 'черный черт',
+                'кобан',
             ];
 
             // send random insult
@@ -154,11 +155,11 @@ $app->post('/bot', function () use ($app) {
             $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
             // if user say yes
-            if ((stripos($data->object->body, 'да') !== false ||
-                stripos($data->object->body, 'ага') !== false ||
-                stripos($data->object->body, 'конечно') !== false ||
-                stripos($data->object->body, 'согласен') !== false ||
-                stripos($data->object->body, 'точно') !== false)) {
+            if ((mb_stripos($data->object->body, 'да') !== false ||
+                mb_stripos($data->object->body, 'ага') !== false ||
+                mb_stripos($data->object->body, 'конечно') !== false ||
+                mb_stripos($data->object->body, 'согласен') !== false ||
+                mb_stripos($data->object->body, 'точно') !== false)) {
                 $yes = [
                     'вот, то-то же',
                     'ага',
@@ -181,20 +182,20 @@ $app->post('/bot', function () use ($app) {
             }
 
             // if user say "you" - send "no, you"
-            if ((stripos($data->object->body, 'ты') !== false ||
-                stripos($data->object->body, 'сам') !== false ||
-                stripos($data->object->body, 'не') !== false ||
-                stripos($data->object->body, 'no') !== false ||
-                stripos($data->object->body, 'пид') !== false ||
-                stripos($data->object->body, 'сук') !== false ||
-                stripos($data->object->body, 'лош') !== false ||
-                stripos($data->object->body, 'лох') !== false ||
-                stripos($data->object->body, 'дебил') !== false ||
-                stripos($data->object->body, 'идиот') !== false ||
-                stripos($data->object->body, 'скот') !== false ||
-                stripos($data->object->body, 'скат') !== false ||
-                stripos($data->object->body, 'уе') !== false ||
-                stripos($data->object->body, 'вы') !== false)) {
+            if ((mb_stripos($data->object->body, 'ты') !== false ||
+                mb_stripos($data->object->body, 'сам') !== false ||
+                mb_stripos($data->object->body, 'не') !== false ||
+                mb_stripos($data->object->body, 'no') !== false ||
+                mb_stripos($data->object->body, 'пид') !== false ||
+                mb_stripos($data->object->body, 'сук') !== false ||
+                mb_stripos($data->object->body, 'лош') !== false ||
+                mb_stripos($data->object->body, 'лох') !== false ||
+                mb_stripos($data->object->body, 'дебил') !== false ||
+                mb_stripos($data->object->body, 'идиот') !== false ||
+                mb_stripos($data->object->body, 'скот') !== false ||
+                mb_stripos($data->object->body, 'скат') !== false ||
+                mb_stripos($data->object->body, 'уе') !== false ||
+                mb_stripos($data->object->body, 'вы') !== false)) {
 
                 $no_you = [
                     'нет, ты',
@@ -222,8 +223,8 @@ $app->post('/bot', function () use ($app) {
 
             // go away
             if (
-                stripos($data->object->body, 'иди ') !== false ||
-                stripos($data->object->body, 'пош') !== false
+                mb_stripos($data->object->body, 'иди ') !== false ||
+                mb_stripos($data->object->body, 'пош') !== false
             ) {
                 $go_away = [
                     'сам иди',
@@ -287,24 +288,24 @@ $app->post('/bot', function () use ($app) {
 
             // no is gay's answer
             if (
-                stripos($data->object->body, 'дора ответ') !== false ||
-                stripos($data->object->body, 'гея ответ') !== false
+                mb_stripos($data->object->body, 'дора ответ') !== false ||
+                mb_stripos($data->object->body, 'гея ответ') !== false
             ) {
                 $request_params['message'] = 'гея аргумент';
             }
             if (
-                stripos($data->object->body, 'дор обнаружен') !== false ||
-                stripos($data->object->body, 'гей обнаружен') !== false ||
+                mb_stripos($data->object->body, 'дор обнаружен') !== false ||
+                mb_stripos($data->object->body, 'гей обнаружен') !== false ||
                 // for written errors
-                stripos($data->object->body, 'дор обноружен') !== false ||
-                stripos($data->object->body, 'гей обноружен') !== false
+                mb_stripos($data->object->body, 'дор обноружен') !== false ||
+                mb_stripos($data->object->body, 'гей обноружен') !== false
             ) {
                 $request_params['message'] = 'я засекречен, твой анал не вечен)';
             }
 
             // yes - end of ...
             if (
-                stripos($data->object->body, 'головка от') !== false
+                mb_stripos($data->object->body, 'головка от') !== false
             ) {
                 $end_of = [
                     'а ты ее края)',
@@ -316,7 +317,7 @@ $app->post('/bot', function () use ($app) {
             }
 
             if (
-                stripos($data->object->body, 'пиз') !== false
+                mb_stripos($data->object->body, 'пиз') !== false
             ) {
 
                 $request_params['message'] = 'остроумно';

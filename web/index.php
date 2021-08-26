@@ -154,8 +154,8 @@ $app->post('/bot', function () use ($app) {
             $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
             // if user say yes
-            if ((stripos($data->object->body, 'да') !== false ||
-                stripos($data->object->body, 'ага') !== false ||
+            if ((stripos($data->object->body, 'да ') !== false ||
+                stripos($data->object->body, 'ага ') !== false ||
                 stripos($data->object->body, 'конечно') !== false ||
                 stripos($data->object->body, 'согласен') !== false ||
                 stripos($data->object->body, 'точно') !== false)) {
@@ -181,19 +181,20 @@ $app->post('/bot', function () use ($app) {
             }
 
             // if user say "you" - send "no, you"
-            if ((stripos($data->object->body, 'ты') !== false ||
-                stripos($data->object->body, 'сам') !== false ||
+            if ((stripos($data->object->body, 'ты ') !== false ||
+                stripos($data->object->body, 'сам ') !== false ||
                 stripos($data->object->body, 'не') !== false ||
                 stripos($data->object->body, 'no') !== false ||
                 stripos($data->object->body, 'пид') !== false ||
                 stripos($data->object->body, 'сук') !== false ||
+                stripos($data->object->body, 'лош') !== false ||
                 stripos($data->object->body, 'лох') !== false ||
                 stripos($data->object->body, 'дебил') !== false ||
                 stripos($data->object->body, 'идиот') !== false ||
                 stripos($data->object->body, 'скот') !== false ||
                 stripos($data->object->body, 'скат') !== false ||
                 stripos($data->object->body, 'уе') !== false ||
-                stripos($data->object->body, 'вы') !== false)) {
+                stripos($data->object->body, 'вы ') !== false)) {
 
                 $no_you = [
                     'нет, ты',
@@ -282,6 +283,33 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
+            }
+
+            // no is gay's answer
+            if (
+                stripos($data->object->body, 'дора ответ') !== false ||
+                stripos($data->object->body, 'гея ответ') !== false
+            ) {
+                $request_params['message'] = 'гея оргумент';
+            }
+            if (
+                stripos($data->object->body, 'дор обноружен') !== false ||
+                stripos($data->object->body, 'гей обноружен') !== false
+            ) {
+                $request_params['message'] = 'я засекречен, твой анал не вечен)';
+            }
+
+            // yes - end of ...
+            if (
+                stripos($data->object->body, 'головка от') !== false
+            ) {
+                $end_of = [
+                    'а ты ее края)',
+                    'фамилия твоя',
+                    'сейчас окажется у тебя',
+                ];
+
+                $request_params['message'] = $end_of[array_rand($end_of)];
             }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

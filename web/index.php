@@ -53,7 +53,7 @@ $app->post('/bot', function () use ($app) {
                 'петя',
                 'собака',
                 'животное',
-                'живатина',
+                'животина',
                 'скотина',
                 'леший',
                 'дед',
@@ -114,7 +114,36 @@ $app->post('/bot', function () use ($app) {
                 'абобус',
                 'абобус',
                 'даша корейка',
-                // '',
+                'скот',
+                'палено',
+                'бревно',
+                'пень',
+                'обосрался',
+                'обосрался',
+                'обоссался',
+                'в говне',
+                'в моче',
+                'негр',
+                'нигер',
+                'барыга?',
+                'очкобус',
+                'страшный',
+                'очконавт',
+                'старпер',
+                'баба',
+                'Люся',
+                'больной',
+                'псих',
+                'быдло',
+                'стырик',
+                'нищий',
+                'слабак',
+                'черт',
+                'чертила',
+                'чертище',
+                'ЧЕРТопоЛОХ',
+                'черт',
+                'черный черт',
             ];
 
             // send random insult
@@ -156,6 +185,14 @@ $app->post('/bot', function () use ($app) {
                 stripos($data->object->body, 'сам') !== false ||
                 stripos($data->object->body, 'не') !== false ||
                 stripos($data->object->body, 'no') !== false ||
+                stripos($data->object->body, 'пид') !== false ||
+                stripos($data->object->body, 'сук') !== false ||
+                stripos($data->object->body, 'лох') !== false ||
+                stripos($data->object->body, 'дебил') !== false ||
+                stripos($data->object->body, 'идиот') !== false ||
+                stripos($data->object->body, 'скот') !== false ||
+                stripos($data->object->body, 'скат') !== false ||
+                stripos($data->object->body, 'уе') !== false ||
                 stripos($data->object->body, 'вы') !== false)) {
 
                 $no_you = [
@@ -226,6 +263,25 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $shut_up[array_rand($shut_up)];
+            }
+
+            // user says insults himself
+            if (
+                array_intersect(explode(' ', $data->object->body), $insults)
+            ) {
+                $it_is_you = [
+                    'сам такой',
+                    'сам такой',
+                    'сам',
+                    'нет, ты',
+                    'нет, ты',
+                    'нет',
+                    'неа)',
+                    'не обзывайся!',
+                    'кто обзывается. тот сам так называется!',
+                ];
+
+                $request_params['message'] = $it_is_you[array_rand($it_is_you)];
             }
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

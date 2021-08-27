@@ -295,6 +295,11 @@ $app->post('/bot', function () use ($app) {
                     'неа)',
                     'не обзывайся!',
                     'кто обзывается. тот сам так называется!',
+                    'ээ, слыш, го по телефону разберёмся! 8 (481) 277-38-30',
+                    'слыш, ' . $insults[$random_insult_number] . ' давай по телефону разберемся! 8 (481) 238-05-45',
+                    'стрелку забить хочешь? Давай, звони 8 (481) 244-55-57',
+                    'я не понял, брат, че такое, э? давай, звони 8 (481) 244-05-27 разнесу тебя',
+                    'какие-то проблемы? звони, разберемся 8 (495) 601-00-09',
                 ];
 
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
@@ -374,10 +379,58 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $hi[array_rand($hi)];
             }
 
-            // ===== STICKERS AND  ===== // 
+            // === HAHAHAHAHAHAH === //
+            if (
+                mb_stripos($data->object->body, 'хах') !== false ||
+                mb_stripos($data->object->body, 'апх') !== false ||
+                mb_stripos($data->object->body, 'хп') !== false ||
+                mb_stripos($data->object->body, 'хих') !== false ||
+                mb_stripos($data->object->body, 'вазва') !== false ||
+                mb_stripos($data->object->body, 'хвх') !== false ||
+                mb_stripos($data->object->body, 'хвах') !== false ||
+                mb_stripos($data->object->body, 'хвав') !== false ||
+                mb_stripos($data->object->body, 'хех') !== false ||
+                mb_stripos($data->object->body, 'заз') !== false ||
+                mb_stripos($data->object->body, 'азаз') !== false ||
+                mb_stripos($data->object->body, 'азааз') !== false ||
+                mb_stripos($data->object->body, 'зааз') !== false ||
+                mb_stripos($data->object->body, 'зза') !== false ||
+                mb_stripos($data->object->body, 'хохо') !== false ||
+                mb_stripos($data->object->body, 'аха') !== false
+            ) {
+                $please_writte = [
+                    'дома с мамой похихикаешь',
+                    'а тебе всё хиханьки, да хаханьки',
+                    'хахахахахах',
+                    'пхапхапхахв',
+                    'довел до рочки, азазазаз',
+                    'хи-хи ха-ха, вот вам девочки и хи-хи ха-ха',
+                    'ржу ни магу',
+                    'ха, да ты болен',
+                    'хах, вы посмотритете, какой ' . $insults[$random_insult_number],
+                    'хихихи',
+                    'хех, ну и ' . $insults[$random_insult_number],
+                    'трындос, ты с какой палаты?',
+                    'ты че ржешь?',
+                    'скорую вызвать? +8 (495) 963-02-55',
+                    'ля, что с тобой? Позвони по номеру, помогут +8 (343) 307-37-84',
+                    'Позвони по номеру, помогут 568-03-90',
+                    'позвони, тут помогут 227-37-59',
+                    'тебе хорошо? Позвони, проверся +7 (495) 952-88-33',
+                    'Неотложенная скорая психиатрическая помощь на дом +7 (495) 952-84-21',
+                    'Неотложенная скорая психиатрическая помощь на дом +7 (495) 952-84-21',
+                    'скорую надо вызвать? +8 (495) 963-10-77',
+                    'Срочно звони, там сейчас деньги раздают! 42-78-04',
+                    'Бот доступен по телефону 38-06-82',
+                    '',
+                ];
+
+                $request_params['message'] = $please_writte[array_rand($please_writte)];
+            }
+
+            // ===== STICKERS AND VOISE MESSAGES ===== // 
             if (strlen($data->object->body) == 0) {
                 $please_writte = [
-                    // 'и тебе привет, ' . $insults[$random_insult_number],
                     'текстом пиши, руки не отвалятся!',
                     'слыш, ' . $insults[$random_insult_number] . ', написать сложно?!',
                     'эй, ' . $insults[$random_insult_number] . ', печатать лень?!',
@@ -387,6 +440,10 @@ $app->post('/bot', function () use ($app) {
                     'печатать умеешь? Так печатай, ' . $insults[$random_insult_number],
                     'Гриша не понимает, напиши сообщение, ' . $insults[$random_insult_number],
                     'Гриша не понимает, напиши сообщение, тварь',
+                    'Бот доступен по телефону 38-06-82',
+                    'Если хочешь поговорить - звони 8 (495) 952-84-21 Григорий по телефону',
+                    'позвони мне 8 (495) 952-84-21 Мне скучно :(((',
+                    'поговори со мной +7 (495) 952-84-21 Мне скучно :(',
                 ];
 
                 $request_params['message'] = $please_writte[array_rand($please_writte)];

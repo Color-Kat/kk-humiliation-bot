@@ -347,6 +347,7 @@ $app->post('/bot', function () use ($app) {
             if (
                 mb_stripos($data->object->body, 'прив') !== false ||
                 mb_stripos($data->object->body, 'ку') !== false ||
+                mb_stripos($data->object->body, 'добр') !== false ||
                 mb_stripos($data->object->body, 'здравс') !== false ||
                 mb_stripos($data->object->body, 'здрас') !== false ||
                 mb_stripos($data->object->body, 'алло') !== false ||
@@ -382,6 +383,7 @@ $app->post('/bot', function () use ($app) {
             // === HAHAHAHAHAHAH === //
             if (
                 mb_stripos($data->object->body, 'хах') !== false ||
+                mb_stripos($data->object->body, 'ха') !== false ||
                 mb_stripos($data->object->body, 'апх') !== false ||
                 mb_stripos($data->object->body, 'хп') !== false ||
                 mb_stripos($data->object->body, 'хих') !== false ||

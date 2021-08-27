@@ -305,6 +305,29 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
             }
 
+            if (
+                mb_stripos($data->object->body, 'спс') !== false ||
+                mb_stripos($data->object->body, 'пасибо') !== false ||
+                mb_stripos($data->object->body, 'пасиба') !== false
+            ) {
+                $end_of = [
+                    'пожалуйста, ' . $insults[$random_insult_number],
+                    'всегда пожалуйста',
+                    'всегда пожалуйста, ' . $insults[$random_insult_number],
+                    'и ты иди в жопу',
+                    'а ты иди к черту',
+                    'подпишись, ' . $insults[$random_insult_number],
+                    'подпишись на меня тогда, ' . $insults[$random_insult_number],
+                    'сделай красиво, на группу подпишись',
+                    'не веди себя плешиво, подпишись на меняя',
+                    // 'мамке спасибо скажешь',
+                    // 'бате скажи, что не успел',
+                    // 'мамке скажи, что тебя оставила',
+                ];
+
+                $request_params['message'] = $end_of[array_rand($end_of)];
+            }
+
             // === NO IS GAY"S ANSWER === //
             // no is gay's answer
             if (
@@ -405,7 +428,7 @@ $app->post('/bot', function () use ($app) {
                     'а тебе всё хиханьки, да хаханьки',
                     'хахахахахах',
                     'пхапхапхахв',
-                    'довел до рочки, азазазаз',
+                    'довел до ручки, азазазаз',
                     'хи-хи ха-ха, вот вам девочки и хи-хи ха-ха',
                     'ржу ни магу',
                     'ха, да ты болен',
@@ -424,7 +447,6 @@ $app->post('/bot', function () use ($app) {
                     'скорую надо вызвать? +8 (495) 963-10-77',
                     'Срочно звони, там сейчас деньги раздают! 42-78-04',
                     'Бот доступен по телефону 38-06-82',
-                    '',
                 ];
 
                 $request_params['message'] = $please_writte[array_rand($please_writte)];

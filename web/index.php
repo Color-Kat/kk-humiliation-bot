@@ -305,12 +305,13 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
             }
 
+            // === THANKS === //
             if (
                 mb_stripos($data->object->body, 'спс') !== false ||
                 mb_stripos($data->object->body, 'пасибо') !== false ||
                 mb_stripos($data->object->body, 'пасиба') !== false
             ) {
-                $end_of = [
+                $thanks = [
                     'пожалуйста, ' . $insults[$random_insult_number],
                     'всегда пожалуйста',
                     'всегда пожалуйста, ' . $insults[$random_insult_number],
@@ -323,6 +324,26 @@ $app->post('/bot', function () use ($app) {
                     // 'мамке спасибо скажешь',
                     // 'бате скажи, что не успел',
                     // 'мамке скажи, что тебя оставила',
+                ];
+
+                $request_params['message'] = $thanks[array_rand($thanks)];
+            }
+
+            // === sock === //
+            if (
+                mb_stripos($data->object->body, 'сасат') !== false ||
+                mb_stripos($data->object->body, 'соси ') !== false ||
+                mb_stripos($data->object->body, 'саси ') !== false
+            ) {
+                $end_of = [
+                    'тебе что ли, ' . $insults[$random_insult_number] . '?',
+                    'сдурел?',
+                    'го со мной?)',
+                    'а можно тебе?',
+                    'у меня нет парня, будешь моим?',
+                    'позвони мне, договоримя 8 (910) 789-04-54',
+                    'буду только рад) звони 8 (495) 225-99-97',
+                    '8 (499) 288-76-40',
                 ];
 
                 $request_params['message'] = $end_of[array_rand($end_of)];

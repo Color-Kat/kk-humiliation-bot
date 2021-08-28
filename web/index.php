@@ -809,6 +809,7 @@ $app->post('/bot', function () use ($app) {
                         http_build_query([
                             'user_id' => $data->object->user_id,
                             'access_token' => getenv('VK_TOKEN'),
+                            'fields' => "city",
                             'v' => '5.80'
                         ])
                 );

@@ -855,7 +855,7 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'урр') !== false ||
                 mb_stripos($data->object->body, 'ого') !== false ||
                 mb_stripos($data->object->body, 'вау') !== false ||
-                mb_stripos($data->object->body, 'wow') !== false ||
+                mb_stripos($data->object->body, 'wow') !== false
             ) {
                 $wow = [
                     'это еще цветочки, подержи моё пиво',
@@ -902,6 +902,7 @@ $app->post('/bot', function () use ($app) {
 
             // спокойной ночи
             // слабо
+            // эй
             // Как тебя зовут, ты кто, григорий
             // Плохо выглядишь, мать жива?
             // Ответ на мать. Мать в канаве

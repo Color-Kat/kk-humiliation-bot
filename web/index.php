@@ -485,48 +485,6 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = 'остроумно';
             }
 
-            // HI HELLO GOOD DAY
-            if (
-                mb_stripos($data->object->body, 'прив') !== false ||
-                (mb_stripos($data->object->body, 'ку') !== false && strlen($data->object->body) === 2) ||
-                mb_stripos($data->object->body, 'куку') !== false ||
-                mb_stripos($data->object->body, 'hi') !== false ||
-                mb_stripos($data->object->body, 'hello') !== false ||
-                mb_stripos($data->object->body, 'хай') !== false ||
-                mb_stripos($data->object->body, 'хелло') !== false ||
-                mb_stripos($data->object->body, 'добр') !== false ||
-                mb_stripos($data->object->body, 'здравс') !== false ||
-                mb_stripos($data->object->body, 'здрас') !== false ||
-                mb_stripos($data->object->body, 'алло') !== false ||
-                mb_stripos($data->object->body, 'аллё') !== false ||
-                mb_stripos($data->object->body, 'здаро') !== false ||
-                mb_stripos($data->object->body, 'добрый') !== false ||
-                mb_stripos($data->object->body, 'здоро') !== false ||
-                mb_stripos($data->object->body, 'здрави') !== false
-            ) {
-                $hi = [
-                    'и тебе привет, ' . $insults[$random_insult_number],
-                    'здраствуй, ' . $insults[$random_insult_number],
-                    'иди к черту, ' . $insults[$random_insult_number],
-                    'я тебя ненавижу!',
-                    'ты испортил мне весь день(',
-                    'ты кто такой? иди к черту, я тебя не звал!',
-                    'ты кто такой? иди нафиг, я тебя не звал!',
-                    'хто я?',
-                    'хулиган!',
-                    'вот дебилов развелось. На каждом шагу уже!',
-                    'вот петухов развелось. На каждом шагу уже!',
-                    'вот уродов развелось. На каждом шагу уже!',
-                    'плати налоги',
-                    'я Григорий, пошел нахрен!',
-                    'я Григорий, пошел в баню!',
-                    'я Гриша, а ты ' . $insults[$random_insult_number],
-                    'я Гриша. Гриша хороший, а ты ' . $insults[$random_insult_number],
-                ];
-
-                $request_params['message'] = $hi[array_rand($hi)];
-            }
-
             // === HAHAHAHAHAHAH === //
             if (
                 mb_stripos($data->object->body, 'хах') !== false ||
@@ -583,6 +541,48 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $laughter[array_rand($laughter)];
+            }
+
+            // HI HELLO GOOD DAY
+            if (
+                mb_stripos($data->object->body, 'прив') !== false ||
+                (mb_stripos($data->object->body, 'ку') !== false && strlen($data->object->body) === 2) ||
+                mb_stripos($data->object->body, 'куку') !== false ||
+                mb_stripos($data->object->body, 'hi') !== false ||
+                mb_stripos($data->object->body, 'hello') !== false ||
+                mb_stripos($data->object->body, 'хай') !== false ||
+                mb_stripos($data->object->body, 'хелло') !== false ||
+                mb_stripos($data->object->body, 'добр') !== false ||
+                mb_stripos($data->object->body, 'здравс') !== false ||
+                mb_stripos($data->object->body, 'здрас') !== false ||
+                mb_stripos($data->object->body, 'алло') !== false ||
+                mb_stripos($data->object->body, 'аллё') !== false ||
+                mb_stripos($data->object->body, 'здаро') !== false ||
+                mb_stripos($data->object->body, 'добрый') !== false ||
+                mb_stripos($data->object->body, 'здоро') !== false ||
+                mb_stripos($data->object->body, 'здрави') !== false
+            ) {
+                $hi = [
+                    'и тебе привет, ' . $insults[$random_insult_number],
+                    'здраствуй, ' . $insults[$random_insult_number],
+                    'иди к черту, ' . $insults[$random_insult_number],
+                    'я тебя ненавижу!',
+                    'ты испортил мне весь день(',
+                    'ты кто такой? иди к черту, я тебя не звал!',
+                    'ты кто такой? иди нафиг, я тебя не звал!',
+                    'хто я?',
+                    'хулиган!',
+                    'вот дебилов развелось. На каждом шагу уже!',
+                    'вот петухов развелось. На каждом шагу уже!',
+                    'вот уродов развелось. На каждом шагу уже!',
+                    'плати налоги',
+                    'я Григорий, пошел нахрен!',
+                    'я Григорий, пошел в баню!',
+                    'я Гриша, а ты ' . $insults[$random_insult_number],
+                    'я Гриша. Гриша хороший, а ты ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $hi[array_rand($hi)];
             }
 
             // ===== STICKERS AND VOISE MESSAGES ===== // 

@@ -828,13 +828,12 @@ $app->post('/bot', function () use ($app) {
                     'подержите моё пиво! я Григорий',
                     'я Гриша, могу мыло помыть',
                     'я Гриша, раньше в похоронном агенстве работал, теперь тут',
-                    // 'я Гришка, самый опасный криминальный вор в ' . $user_info['fields']['city']['title'],
-                    // 'я Гриша, живу в городе' . $user_info['fields']['city']['title'],
-                    // 'я черепаха-бизмесмен по имени Григорий, а ты ' . $insults[$random_insult_number]
+                    'я Гришка, самый опасный криминальный вор в ' . $user_info['fields']['city']['title'] ?? 'России',
+                    'я Гриша, живу в городе' . $user_info['fields']['city']['title'] ?? 'России',
+                    'я черепаха-бизмесмен по имени Григорий, а ты ' . $insults[$random_insult_number]
                 ];
 
                 $request_params['message'] = $i_am[array_rand($i_am)];
-                $request_params['message'] = json_encode($user_info);
             }
 
             // спокойной ночи

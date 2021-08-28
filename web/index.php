@@ -347,7 +347,7 @@ $app->post('/bot', function () use ($app) {
 
             // ======== LONG TEXT ========= //
             if (
-                strlen($data->object->body) > 69
+                mb_strlen($data->object->body) > 69
             ) {
                 $shut_up = [
                     'заткнись',
@@ -541,7 +541,7 @@ $app->post('/bot', function () use ($app) {
             // HI HELLO GOOD DAY
             if (
                 mb_stripos($data->object->body, 'прив') !== false ||
-                (mb_stripos($data->object->body, 'ку') !== false && strlen($data->object->body) === 2) ||
+                (mb_stripos($data->object->body, 'ку') !== false && mb_strlen($data->object->body) === 2) ||
                 mb_stripos($data->object->body, 'куку') !== false ||
                 mb_stripos($data->object->body, 'hi') !== false ||
                 mb_stripos($data->object->body, 'hello') !== false ||
@@ -581,7 +581,7 @@ $app->post('/bot', function () use ($app) {
             }
 
             // ===== STICKERS AND VOISE MESSAGES ===== // 
-            if (strlen($data->object->body) == 0) {
+            if (mb_strlen($data->object->body) == 0) {
                 $please_writte = [
                     'текстом пиши, руки не отвалятся!',
                     'слыш, ' . $insults[$random_insult_number] . ', написать сложно?!',
@@ -695,11 +695,11 @@ $app->post('/bot', function () use ($app) {
 
             // === ФФфф Фыр === //
             if (
-                (mb_stripos($data->object->body, 'ф') !== false && strlen($data->object->body) === 1) ||
-                (mb_stripos($data->object->body, 'фф') !== false && strlen($data->object->body) === 2) ||
-                (mb_stripos($data->object->body, 'ффф') !== false && strlen($data->object->body) === 3) ||
-                (mb_stripos($data->object->body, 'фффф') !== false && strlen($data->object->body) === 4) ||
-                (mb_stripos($data->object->body, 'ффффф') !== false && strlen($data->object->body) === 5) ||
+                (mb_stripos($data->object->body, 'ф') !== false && mb_strlen($data->object->body) === 1) ||
+                (mb_stripos($data->object->body, 'фф') !== false && mb_strlen($data->object->body) === 2) ||
+                (mb_stripos($data->object->body, 'ффф') !== false && mb_strlen($data->object->body) === 3) ||
+                (mb_stripos($data->object->body, 'фффф') !== false && mb_strlen($data->object->body) === 4) ||
+                (mb_stripos($data->object->body, 'ффффф') !== false && mb_strlen($data->object->body) === 5) ||
                 mb_stripos($data->object->body, 'фыр') !== false
             ) {
                 $ffff = [
@@ -716,11 +716,30 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $ffff[array_rand($ffff)];
             }
 
+            if (
+                (mb_stripos($data->object->body, 'гы') !== false && mb_strlen($data->object->body) === 2) ||
+                mb_stripos($data->object->body, 'гыы') ||
+                mb_stripos($data->object->body, 'ыы')
+            ) {
+                $gi = [
+                    'гы? тебе плохо?',
+                    'чего гыкаешь?',
+                    'ыыыы',
+                    'не, ну человек явно болен, гыы',
+                    'гыыы',
+                    'и чего ты гыкаешь?',
+                    'тужься-тужься ыыыыы',
+                    'рожаешь?',
+                    'срешь? гы'
+                ];
+
+                $request_params['message'] = $gi[array_rand($gi)];
+            }
+
 
             // спокойной ночи
             // слабо
             // Что делаешь, как дела. Как тебя зовут, ты кто, григорий
-            // Фф, гы
             // Плохо выглядишь, мать жива?
             // Ответ на мать. Мать в канаве
             // Таблетки принимал?

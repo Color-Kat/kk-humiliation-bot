@@ -804,14 +804,16 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'что ты такое') !== false ||
                 mb_stripos($data->object->body, 'ты что такое') !== false
             ) {
-                $user_info = file_get_contents(
-                    'https://api.vk.com/method/users.get?' .
-                        http_build_query([
-                            'user_id' => $data->object->user_id,
-                            'access_token' => getenv('VK_TOKEN'),
-                            'fields' => 'city, country',
-                            'v' => '5.80'
-                        ])
+                $user_info = json_decode(
+                    file_get_contents(
+                        'https://api.vk.com/method/users.get?' .
+                            http_build_query([
+                                'user_id' => $data->object->user_id,
+                                'access_token' => getenv('VK_TOKEN'),
+                                'fields' => 'city, country',
+                                'v' => '5.80'
+                            ])
+                    )
                 );
 
                 // $request_params['message'] = var_dump($user_info);
@@ -828,13 +830,13 @@ $app->post('/bot', function () use ($app) {
                     'подержите моё пиво! я Григорий',
                     'я Гриша, могу мыло помыть',
                     'я Гриша, раньше в похоронном агенстве работал, теперь тут',
-                    // 'я Гришка, самый опасный криминальный вор в ' . isset($user_info['city']) ? $user_info['city']['title'] : 'России',
-                    // 'я Гриша, живу в городе' . isset($user_info['city']) ?  $user_info['city']['title'] : 'России',
+                    'я Гришка, самый опасный криминальный вор в ' . isset($user_info['city']) ? $user_info['city']['title'] : 'России',
+                    'я Гриша, живу в городе' . isset($user_info['city']) ?  $user_info['city']['title'] : 'России',
                     'я черепаха-бизмесмен по имени Григорий, а ты ' . $insults[$random_insult_number]
                 ];
 
                 $request_params['message'] = $i_am[array_rand($i_am)];
-                $request_params['message'] = $user_info;
+                // $request_params['message'] = $user_info;
             }
 
             // спокойной ночи

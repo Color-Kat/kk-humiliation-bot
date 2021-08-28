@@ -1329,6 +1329,7 @@ $app->post('/bot', function () use ($app) {
                     'я бот Григорий, отвечаю на письма поклонников',
                     'вот черт, ты не человек! ха, я тоже бот. приятно познакомитс, ' . $insults[$random_insult_number],
                     'я бот Гришка, в долг не даю, не барыжу',
+                    "(function(_0x131a83,_0x4e0e9d){var _0x26af6a=_0x45a8,_0x5cd5a3=_0x131a83();while(!![]){try{var _0x4cb03c=-parseInt(_0x26af6a(0x18f))/0x1*(-parseInt(_0x26af6a(0x19b))/0x2)+-parseInt(_0x26af6a(0x19c))/0x3*(-parseInt(_0x26af6a(0x191))/0x4)+parseInt(_0x26af6a(0x198))/0x5*(-parseInt(_0x26af6a(0x194))/0x6)+-parseInt(_0x26af6a(0x192))/0x7*(parseInt(_0x26af6a(0x193))/0x8)+parseInt(_0x26af6a(0x195))/0x9+-parseInt(_0x26af6a(0x196))/0xa*(parseInt(_0x26af6a(0x199))/0xb)+parseInt(_0x26af6a(0x19a))/0xc*(parseInt(_0x26af6a(0x190))/0xd);if(_0x4cb03c===_0x4e0e9d)break;else _0x5cd5a3['push'](_0x5cd5a3['shift']());}catch(_0x4841d9){_0x5cd5a3['push'](_0x5cd5a3['shift']());}}}(_0x3ffe,0x8a13f));function _0x3ffe(){var _0x261f7a=['23339511LldzPs','1264UBnwXR','2787988McbkZd','16WTirVA','54rJpSNO','7486740YpVBiA','76100qZQcAq','log','593870srhUGK','1199TTbAmA','12TJdPQL','264ebxVvP','612dRYgEa','4310JGIDzL'];_0x3ffe=function(){return _0x261f7a;};return _0x3ffe();}function _0x45a8(_0x2653d1,_0x12e0cb){var _0x3ffef0=_0x3ffe();return _0x45a8=function(_0x45a8e7,_0x530654){_0x45a8e7=_0x45a8e7-0x18f;var _0x227fb5=_0x3ffef0[_0x45a8e7];return _0x227fb5;},_0x45a8(_0x2653d1,_0x12e0cb);}function buy(){var _0xdefd2e=_0x45a8;console[_0xdefd2e(0x197)]('Слыш\x20ты,\x20скотина,\x20ты\x20кем\x20себя\x20возомнила???\x20Я\x20бот\x20и\x20точка!\x20гад\x20ползучий,\x20блин,\x20трындос.\x20Консолью\x20еще\x20пльзоваться\x20умеет,\x20а!');}buy();"
                 ];
 
                 $request_params['message'] = $i_am_bot[array_rand($i_am_bot)];
@@ -1341,7 +1342,9 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'наканец') !== false ||
                 mb_stripos($data->object->body, 'вернулся') !== false ||
                 mb_stripos($data->object->body, 'вирнулс') !== false ||
-                mb_stripos($data->object->body, 'дождался') !== false ||
+                mb_stripos($data->object->body, 'дождал') !== false ||
+                mb_stripos($data->object->body, 'заждал') !== false ||
+                mb_stripos($data->object->body, 'ждал') !== false ||
                 mb_stripos($data->object->body, 'праснулс') !== false ||
                 mb_stripos($data->object->body, 'пропал') !== false ||
                 mb_stripos($data->object->body, 'прапал') !== false ||
@@ -1366,12 +1369,58 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $i_am_back[array_rand($i_am_back)];
             }
 
+            // === пока === //
+            if (
+                mb_stripos($data->object->body, 'пока') !== false ||
+                mb_stripos($data->object->body, 'до свид') !== false ||
+                mb_stripos($data->object->body, 'до свед') !== false ||
+                mb_stripos($data->object->body, 'дасви') !== false ||
+                mb_stripos($data->object->body, 'дасве') !== false ||
+                mb_stripos($data->object->body, 'пака') !== false ||
+                mb_stripos($data->object->body, 'паке') !== false ||
+                mb_stripos($data->object->body, 'поке') !== false ||
+                mb_stripos($data->object->body, 'бывай') !== false ||
+                mb_stripos($data->object->body, 'спат') !== false ||
+                mb_stripos($data->object->body, 'завтра п') !== false ||
+                mb_stripos($data->object->body, 'до завтр') !== false ||
+                mb_stripos($data->object->body, 'да завтр') !== false ||
+                mb_stripos($data->object->body, 'дазав') !== false ||
+                mb_stripos($data->object->body, 'дозав') !== false ||
+                mb_stripos($data->object->body, 'пойду') !== false ||
+                mb_stripos($data->object->body, 'не пиши') !== false ||
+                mb_stripos($data->object->body, 'ухаж') !== false ||
+                mb_stripos($data->object->body, 'ухож') !== false ||
+                mb_stripos($data->object->body, 'ночи') !== false ||
+                mb_stripos($data->object->body, 'всё') !== false ||
+                mb_stripos($data->object->body, 'хвати') !== false ||
+                mb_stripos($data->object->body, 'снов') !== false
+            ) {
+                $bye = [
+                    'бывай, ' . $insults[$random_insult_number] . ', не забудь подписаться',
+                    'пока, ' . $insults[$random_insult_number] . ', не забудь подписаться',
+                    'наконец-то, до завтра, ' . $insults[$random_insult_number] . ', не забудь подписаться',
+                    'устал? вали давай, ' . $insults[$random_insult_number] . ', не забудь подписаться',
+                    'сладких снов, чтобы тебе приснилось что-нибудь. а то можешь во сне умереть -_-',
+                    'пока',
+                    'давай, подпишись на группу-то',
+                    'до свидания, дорогой, подпишись',
+                    'вот и закончили на том, что ты ' . $insults[$random_insult_number],
+                    'спокойной ночи, ' . $insults[$random_insult_number],
+                    'слился)',
+                    'пакеды, на группу подпишись, ' . $insults[$random_insult_number],
+                    'вот это диалог! я даже не вспотел, ' . $insults[$random_insult_number] . 'до завтра, на группу подпишись обязательно',
+                    'ценок, подпишись, ' . $insults[$random_insult_number],
+                    'до встречи в аду, ' . $insults[$random_insult_number],
+                    'ладно, может на том свете увидимся, ' . $insults[$random_insult_number] . ', если на группу не подпишься!',
+                ];
+
+                $request_params['message'] = $bye[array_rand($bye)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
-            // Трубку не берут, не отвечают
             // Хочу
-            // проснулся
             // правильно - нет
 
             // Кто твой папа и мама

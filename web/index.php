@@ -813,7 +813,8 @@ $app->post('/bot', function () use ($app) {
                                 'fields' => 'city, country',
                                 'v' => '5.80'
                             ])
-                    )
+                    ),
+                    true
                 );
 
                 // $request_params['message'] = var_dump($user_info);

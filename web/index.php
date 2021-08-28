@@ -1164,6 +1164,57 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $good[array_rand($good)];
             }
 
+            // === понятно - прохладно === //
+            if (
+                mb_stripos($data->object->body, 'понятно') !== false ||
+                mb_stripos($data->object->body, 'ясно') !== false ||
+                mb_stripos($data->object->body, 'ясна') !== false ||
+                mb_stripos($data->object->body, 'ясн') !== false ||
+                mb_stripos($data->object->body, 'панятна') !== false ||
+                mb_stripos($data->object->body, 'панятно') !== false ||
+                mb_stripos($data->object->body, 'понятна') !== false
+            ) {
+                $clear = [
+                    'в жопе не приятно?',
+                    'странно',
+                    'ничего не понятно и ничего не ясно!',
+                    'ничего не ясно и ничего не понятно тебе! ты ' . $insults[$random_insult_number],
+                    'что тебе понятно?? ты ' . $insults[$random_insult_number],
+                    'а что происходит?',
+                    'у тебя в голове ватно',
+                    'не выражаюсь матно',
+                    'тебе содержать будет затратно',
+                    'а я роды у кошки принимаю. не пойму, как пуповину завязать',
+                    'чет не пойму, как у кошки пуповину завязать',
+                ];
+
+                $request_params['message'] = $clear[array_rand($clear)];
+            }
+
+            // === ладно === //
+            if (
+                mb_stripos($data->object->body, 'ладна') !== false ||
+                mb_stripos($data->object->body, 'ладно') !== false
+            ) {
+                $okeh = [
+                    'прохладно',
+                    'в жопе не приятно?',
+                    'странно',
+                    'досадно',
+                    'громадно',
+                    'вот и славно, что "ладно", ' . $insults[$random_insult_number],
+                    'давно ничего не ладно',
+                    'ничего не ладно! ты ' . $insults[$random_insult_number],
+                    'отрадно',
+                    'вот и прекрасно! договорились не напрасно!',
+                    'от тебя разит смрадно',
+                    'пахнет от тебя смрадно',
+                    'и тебе ладно, и мне... но денег нет, - не дам!'
+                ];
+
+                $request_params['message'] = $okeh[array_rand($okeh)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
@@ -1172,7 +1223,10 @@ $app->post('/bot', function () use ($app) {
             // Откликается на имя
             // Трубку не берут, не отвечают
             // Хочу
-            // хорошо
+            // ты чел? ты бот?
+            // после тебя
+            // тоже
+            // проснулся
 
             // Кто твой папа и мама
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

@@ -940,6 +940,7 @@ $app->post('/bot', function () use ($app) {
             if (
                 (mb_stripos($data->object->body, 'э') !== false && strlen($data->object->body) === 1) ||
                 mb_stripos($data->object->body, 'ээ') !== false ||
+                mb_stripos($data->object->body, 'эй') !== false ||
                 mb_stripos($data->object->body, 'гоо') !== false ||
                 (mb_stripos($data->object->body, 'го') !== false && strlen($data->object->body) === 2)
             ) {
@@ -950,6 +951,9 @@ $app->post('/bot', function () use ($app) {
                     'задолбал уже, подожди',
                     'не раздражай меня',
                     'раздражаешь',
+                    'погоди, я сру',
+                    'подожди, я на толчке',
+                    'подожди, я в туалете сру!',
                     'чего?'
                 ];
 
@@ -986,7 +990,6 @@ $app->post('/bot', function () use ($app) {
 
             // спокойной ночи
             // слабо
-            // эй
             // Как тебя зовут, ты кто, григорий
             // Ответ на мать. Мать в канаве
             // Слит

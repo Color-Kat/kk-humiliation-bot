@@ -39,10 +39,7 @@ $app->post('/bot', function () use ($app) {
             // insults list
             $insults = [
                 'лох',
-                'лох',
                 'лошара',
-                'лошара',
-                'лашпед',
                 'лашпед',
                 'петух',
                 'петушара',
@@ -55,19 +52,17 @@ $app->post('/bot', function () use ($app) {
                 'леший',
                 'дед',
                 'пердун',
-                'пердун',
                 'дед-пердун',
                 'запердыш',
                 'засерыш',
                 'урод',
                 'урод',
                 'дурак',
-                'дурак',
                 'дебил',
                 'дебилойд',
                 'уродец',
                 'гад',
-                'падла',
+                'огурец',
                 'падла',
                 'мусор',
                 'тупица',
@@ -669,6 +664,9 @@ $app->post('/bot', function () use ($app) {
             // === че ржешь? === //
             if (
                 mb_stripos($data->object->body, 'ржешь') !== false ||
+                mb_stripos($data->object->body, 'ржёшь') !== false ||
+                mb_stripos($data->object->body, 'смешно') !== false ||
+                mb_stripos($data->object->body, 'смишно') !== false ||
                 mb_stripos($data->object->body, 'смеёшься') !== false ||
                 mb_stripos($data->object->body, 'смеешься') !== false ||
                 mb_stripos($data->object->body, 'смейс') !== false ||
@@ -695,9 +693,31 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $why_laughing[array_rand($why_laughing)];
             }
 
+            // === ФФфф Фыр === //
+            if (
+                (mb_stripos($data->object->body, 'ф') !== false && strlen($data->object->body) === 1) ||
+                (mb_stripos($data->object->body, 'фф') !== false && strlen($data->object->body) === 2) ||
+                (mb_stripos($data->object->body, 'ффф') !== false && strlen($data->object->body) === 3) ||
+                (mb_stripos($data->object->body, 'фффф') !== false && strlen($data->object->body) === 4) ||
+                (mb_stripos($data->object->body, 'ффффф') !== false && strlen($data->object->body) === 5) ||
+                mb_stripos($data->object->body, 'фыр') !== false
+            ) {
+                $ffff = [
+                    'ты чего фыркаешь?',
+                    'чего фыркаешь? ты лиса что ли? ты же ' . $insults[$random_insult_number],
+                    'ффффф',
+                    'ффырр',
+                    'фф',
+                    'ф',
+                    'хватит фыркать!',
+                    'не, ну ты огурец',
+                ];
+
+                $request_params['message'] = $ffff[array_rand($ffff)];
+            }
+
 
             // спокойной ночи
-            // ржешь
             // слабо
             // Что делаешь, как дела. Как тебя зовут, ты кто, григорий
             // Фф, гы

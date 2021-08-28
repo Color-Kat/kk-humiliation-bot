@@ -144,6 +144,9 @@ $app->post('/bot', function () use ($app) {
                 'абориген',
                 'ушлепок',
                 'тапок',
+                // 'плохо выглядишь, мать жива?',
+                // 'что с тобой? мать жива?',
+                // 'что с тобой? мать здорова?',
                 'тумбочка прикроватная',
                 'разве не дурак?',
                 'разве не скотина?',
@@ -163,7 +166,7 @@ $app->post('/bot', function () use ($app) {
                 'чмырёныш',
                 'гомункл',
                 'псина',
-                'какашка'
+                'какашка',
             ];
 
             // send random insult
@@ -231,6 +234,9 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'ok') !== false ||
                 mb_stripos($data->object->body, 'акей') !== false ||
                 mb_stripos($data->object->body, 'конечно') !== false ||
+                mb_stripos($data->object->body, 'верно') !== false ||
+                mb_stripos($data->object->body, 'правильно') !== false ||
+                mb_stripos($data->object->body, 'правельно') !== false ||
                 mb_stripos($data->object->body, 'кане') !== false ||
                 mb_stripos($data->object->body, 'канэ') !== false ||
                 mb_stripos($data->object->body, 'согласен') !== false ||
@@ -795,6 +801,9 @@ $app->post('/bot', function () use ($app) {
             // === кто ты? === //
             if (
                 mb_stripos($data->object->body, 'ты кто') !== false ||
+                mb_stripos($data->object->body, 'ты робот') !== false ||
+                mb_stripos($data->object->body, 'ты бот') !== false ||
+                mb_stripos($data->object->body, 'ты человек') !== false ||
                 mb_stripos($data->object->body, 'кто ты') !== false ||
                 mb_stripos($data->object->body, 'хто ты') !== false ||
                 mb_stripos($data->object->body, 'ты хто') !== false ||
@@ -900,17 +909,40 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $lol[array_rand($lol)];
             }
 
+            // === откуда знаешь === //
+            if (
+                mb_stripos($data->object->body, 'откуда зн') !== false ||
+                mb_stripos($data->object->body, 'с чего взял') !== false ||
+                mb_stripos($data->object->body, 'с чего ты взял') !== false ||
+                mb_stripos($data->object->body, 'кодовое слово верблюд') !== false ||
+                mb_stripos($data->object->body, 'знаете?') !== false ||
+                mb_stripos($data->object->body, 'знаешь?') !== false
+            ) {
+                $know = [
+                    'от верблюда',
+                    'знаю',
+                    'я уверен',
+                    'я экстрасенс, а ты ' . $insults[$random_insult_number],
+                    'я всё знаю. спроси, кто ты, и я отвечу: "ты '. $insults[$random_insult_number], . '"',
+                    'просто знаю',
+                    'мать твоя сказала',
+                    'просто предположил, а оказалось правда',
+                    'я мудрый бот',
+                    'с потолка'
+                ];
+
+                $request_params['message'] = $know[array_rand($know)];
+            }
+
             // спокойной ночи
             // слабо
             // эй
             // Как тебя зовут, ты кто, григорий
-            // Плохо выглядишь, мать жива?
             // Ответ на мать. Мать в канаве
-            // Таблетки принимал?
             // Слит
             // слили, как ботика
             // как узнал, знаешь
-            // ура
+            // ты чего?
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

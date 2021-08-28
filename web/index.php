@@ -959,7 +959,7 @@ $app->post('/bot', function () use ($app) {
             // === НУууу === //
             if (
                 mb_stripos($data->object->body, 'нуу') !== false ||
-                (mb_stripos($data->object->body, 'ну') !== false && strlen($data->object->body) === 2)
+                (mb_stripos($data->object->body, 'ну') !== false && mb_strlen($data->object->body) === 2)
             ) {
                 $well = [
                     'баранки гну',
@@ -971,6 +971,14 @@ $app->post('/bot', function () use ($app) {
                     'ну и ну',
                     'ну-ну',
                     'блин, я сру!',
+                    'я тебя согну',
+                    'не нукай!',
+                    'с мамкой нукать будешь',
+                    'ну, типа того',
+                    'ну, как то так',
+                    'а что происходит?',
+                    'что происходит??',
+                    'а? что происходит?',
                 ];
 
                 $request_params['message'] = $well[array_rand($well)];

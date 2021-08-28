@@ -1270,7 +1270,7 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'чувак') !== false
             ) {
                 $what_want = [
-                    'да, слушаю, ' .  $insults[$random_insult_number] . 'что хотел',
+                    'да, слушаю, ' .  $insults[$random_insult_number] . ' что хотел?',
                     'чего надо, ' . $insults[$random_insult_number] . '?',
                     'что хочешь-то?',
                     'в долг не даю, наркотой не торгую',
@@ -1280,6 +1280,7 @@ $app->post('/bot', function () use ($app) {
                     'он самый',
                     'да, я Гришка, тракторист по вызову 8-800-1000-153',
                     'что вы хотите? я могу вас послать, идите в зад, ну или к черту',
+                    'что вы хотите? ааа, ты же ' . $insults[$random_insult_number],
                     'если вы хотите смотреть кино - kinofinder.rf.gd если играть - poorbirds.tk а если общаться, то милости уходи, ' . $insults[$random_insult_number],
                 ];
 
@@ -1290,11 +1291,10 @@ $app->post('/bot', function () use ($app) {
             if (
                 mb_stripos($data->object->body, 'не берут') !== false ||
                 mb_stripos($data->object->body, 'не бирут') !== false ||
-                mb_stripos($data->object->body, 'нет ответа') !== false ||
-                mb_stripos($data->object->body, 'нет атвета') !== false ||
-                mb_stripos($data->object->body, 'не отвечают') !== false ||
-                mb_stripos($data->object->body, 'не атвичают') !== false ||
-                mb_stripos($data->object->body, 'не отвичают') !== false ||
+                mb_stripos($data->object->body, 'нет отв') !== false ||
+                mb_stripos($data->object->body, 'нет атв') !== false ||
+                mb_stripos($data->object->body, 'не отвт') !== false ||
+                mb_stripos($data->object->body, 'не атв') !== false ||
                 mb_stripos($data->object->body, 'занято') !== false ||
                 mb_stripos($data->object->body, 'занята') !== false ||
                 mb_stripos($data->object->body, 'гудки') !== false
@@ -1313,11 +1313,30 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $not_call_answer[array_rand($not_call_answer)];
             }
 
+            // === ты бот? === //
+            if (
+                mb_stripos($data->object->body, 'ты бот') !== false ||
+                mb_stripos($data->object->body, 'ты чел') !== false ||
+                mb_stripos($data->object->body, 'бот ты') !== false
+            ) {
+                $i_am_bot = [
+                    'я робот Григорй, консультант года! что вы ищете? иди в жопу, ' . $insults[$random_insult_number],
+                    'я бот Гришка, тракторист, звони, огород перепахаю 8 (800) 201-25-61',
+                    'я бот Григорий в вк. также доступен по телефону 8 (499) 393-39-28',
+                    'Гриша я - черепаха-бот, а ты, я посмотрю, ' . $insults[$random_insult_number],
+                    'может это ты бот? я человек, седьмые сутки тут на письма отвечаю',
+                    'я бот Григорий, отвечаю на письма фанатов',
+                    'я бот Григорий, отвечаю на письма поклонников',
+                    'вот черт, ты не человек! ха, я тоже бот. приятно познакомитс, ' . $insults[$random_insult_number],
+                    'я бот Гришка, в долг не даю, не барыжу',
+                ];
+
+                $request_params['message'] = $i_am_bot[array_rand($i_am_bot)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
-            // Да - чьи-то слова
-            // Откликается на имя
             // Трубку не берут, не отвечают
             // Хочу
             // ты чел? ты бот?

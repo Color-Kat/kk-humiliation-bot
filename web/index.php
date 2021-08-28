@@ -103,6 +103,15 @@ $app->post('/bot', function () use ($app) {
                 'абобус',
                 'даша корейка',
                 'скот',
+                'плакса',
+                'нытик',
+                'придурок',
+                'жертва изнасилования',
+                'слепой что ли?',
+                'можешь себя нормлаьно вести??',
+                'спасибо мне скажи',
+                'знаешь, кто я, тварина?',
+                'знаешь пароль? кодовое слово верблюдица',
                 'палено',
                 'бревно',
                 'пень',
@@ -916,7 +925,7 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'как узн') !== false ||
                 mb_stripos($data->object->body, 'с чего взял') !== false ||
                 mb_stripos($data->object->body, 'с чего ты взял') !== false ||
-                mb_stripos($data->object->body, 'кодовое слово верблюд') !== false ||
+                mb_stripos($data->object->body, 'верблюдица') !== false ||
                 mb_stripos($data->object->body, 'знаете?') !== false ||
                 mb_stripos($data->object->body, 'знаешь?') !== false
             ) {
@@ -988,13 +997,28 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $well[array_rand($well)];
             }
 
+            // === Слабо === //
+            if (
+                mb_stripos($data->object->body, 'слабо') !== false ||
+                mb_stripos($data->object->body, 'спорим') !== false
+            ) {
+                $argue = [
+                    'спорим',
+                    'окей, мне не слабо',
+                    'не слабо',
+                    'самому не слабо?',
+                    'с дураками не спорю',
+                    'с дебилами спор не веду',
+                    'ты идиот, а я аристократ. Нечего спорить',
+                    'с мамой поспоришь, со мной попрошу беседовать',
+                ];
+
+                $request_params['message'] = $argue[array_rand($argue)];
+            }
+
             // спокойной ночи
-            // слабо
-            // Как тебя зовут, ты кто, григорий
             // Ответ на мать. Мать в канаве
-            // Слит
-            // слили, как ботика
-            // ты чего?
+            // Слит, слили, как ботика
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 

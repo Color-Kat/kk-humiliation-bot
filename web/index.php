@@ -551,7 +551,12 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'здравс') !== false ||
                 mb_stripos($data->object->body, 'здрас') !== false ||
                 mb_stripos($data->object->body, 'алло') !== false ||
+                mb_stripos($data->object->body, 'ало') !== false ||
+                mb_stripos($data->object->body, 'алё') !== false ||
+                mb_stripos($data->object->body, 'але') !== false ||
+                mb_stripos($data->object->body, 'олё') !== false ||
                 mb_stripos($data->object->body, 'аллё') !== false ||
+                mb_stripos($data->object->body, 'алле') !== false ||
                 mb_stripos($data->object->body, 'здаро') !== false ||
                 mb_stripos($data->object->body, 'добрый') !== false ||
                 mb_stripos($data->object->body, 'здоро') !== false ||
@@ -718,8 +723,8 @@ $app->post('/bot', function () use ($app) {
 
             if (
                 (mb_stripos($data->object->body, 'гы') !== false && mb_strlen($data->object->body) === 2) ||
-                mb_stripos($data->object->body, 'гыы') ||
-                mb_stripos($data->object->body, 'ыы')
+                mb_stripos($data->object->body, 'гыы') !== false ||
+                mb_stripos($data->object->body, 'ыы') !== false
             ) {
                 $gi = [
                     'гы? тебе плохо?',

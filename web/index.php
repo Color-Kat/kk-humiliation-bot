@@ -723,6 +723,7 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $ffff[array_rand($ffff)];
             }
 
+            // === Гы гыгы ыыы === ///
             if (
                 (mb_stripos($data->object->body, 'гы') !== false && mb_strlen($data->object->body) === 2) ||
                 mb_stripos($data->object->body, 'гыы') !== false ||
@@ -744,6 +745,7 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $gi[array_rand($gi)];
             }
 
+            // === что делаешь? === //
             if (
                 mb_stripos($data->object->body, 'что делаешь?') !== false ||
                 mb_stripos($data->object->body, 'делаишь') !== false ||
@@ -790,11 +792,20 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $what_doing[array_rand($what_doing)];
             }
 
+            // === кто ты? === //
             if (
                 mb_stripos($data->object->body, 'ты кто') !== false ||
                 mb_stripos($data->object->body, 'кто ты') !== false ||
                 mb_stripos($data->object->body, 'хто ты') !== false ||
                 mb_stripos($data->object->body, 'ты хто') !== false ||
+                mb_stripos($data->object->body, 'ктоо ты') !== false ||
+                mb_stripos($data->object->body, 'ктооо ты') !== false ||
+                mb_stripos($data->object->body, 'хтоо ты') !== false ||
+                mb_stripos($data->object->body, 'хтооо ты') !== false ||
+                mb_stripos($data->object->body, 'ты ктоо') !== false ||
+                mb_stripos($data->object->body, 'ты ктооо') !== false ||
+                mb_stripos($data->object->body, 'ты хтоо') !== false ||
+                mb_stripos($data->object->body, 'ты хтроо') !== false ||
                 mb_stripos($data->object->body, 'тебя зовут') !== false ||
                 mb_stripos($data->object->body, 'тебя завут') !== false ||
                 mb_stripos($data->object->body, 'тибя завут') !== false ||
@@ -834,6 +845,59 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $i_am[array_rand($i_am)];
+            }
+
+            // === УРрААААААА === //
+            if (
+                mb_stripos($data->object->body, 'ура') !== false ||
+                mb_stripos($data->object->body, 'юху') !== false ||
+                mb_stripos($data->object->body, 'уху') !== false ||
+                mb_stripos($data->object->body, 'урр') !== false ||
+                mb_stripos($data->object->body, 'ого') !== false ||
+                mb_stripos($data->object->body, 'вау') !== false ||
+                mb_stripos($data->object->body, 'wow') !== false ||
+            ) {
+                $wow = [
+                    'это еще цветочки, подержи моё пиво',
+                    'юху-хуууу',
+                    'ваааааау',
+                    'ого',
+                    'ни фига себе!',
+                    'очуметь',
+                    'долбануться',
+                    'ошалеть',
+                    'ну ты, брат, даёшь',
+                    'ничего не понимаю',
+                    'балабол',
+                    'сам в шоке',
+                    'да там все просто офигели!',
+                    'ёмаё'
+                ];
+
+                $request_params['message'] = $wow[array_rand($wow)];
+            }
+
+            // === лол === //
+            if (
+                mb_stripos($data->object->body, 'лол') !== false ||
+                mb_stripos($data->object->body, 'лоол') !== false ||
+                mb_stripos($data->object->body, 'лооол') !== false ||
+                mb_stripos($data->object->body, 'лоооол') !== false ||
+                mb_stripos($data->object->body, 'лооооол') !== false ||
+                mb_stripos($data->object->body, 'лоооооол') !== false
+            ) {
+                $lol = [
+                    'балабол',
+                    'прими карвалол',
+                    'ты нарушил протакол',
+                    'ты слушаешь рок-н-ролл?',
+                    'я на тебя очень зол!',
+                    'тебе вставить в жопу кол?',
+                    'я рад за тебя очень-преочень',
+                    'расплескалась синевааа'
+                ];
+
+                $request_params['message'] = $lol[array_rand($lol)];
             }
 
             // спокойной ночи

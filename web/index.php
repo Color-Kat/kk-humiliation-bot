@@ -807,7 +807,7 @@ $app->post('/bot', function () use ($app) {
                 $user_info = file_get_contents(
                     'https://api.vk.com/method/users.get?' .
                         http_build_query([
-                            'user_is' => $data->object->user_id,
+                            'user_id' => $data->object->user_id,
                             'access_token' => getenv('VK_TOKEN'),
                             'v' => '5.80'
                         ])

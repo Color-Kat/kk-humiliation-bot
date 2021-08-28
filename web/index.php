@@ -123,7 +123,7 @@ $app->post('/bot', function () use ($app) {
                 'больной',
                 'псих',
                 'быдло',
-                'стырик',
+                'старик',
                 'нищий',
                 'тварь',
                 'тварина',
@@ -149,8 +149,11 @@ $app->post('/bot', function () use ($app) {
                 'разве не скотина?',
                 'разве не болен?',
                 'болен! Вернись в палату',
+                'тыблетки принимал?',
                 'в палату вернись-то',
                 'с палаты сбежал?',
+                'шизик',
+                'шизой болен?',
                 'говно',
                 'крыса',
                 'крысёныш',
@@ -168,11 +171,12 @@ $app->post('/bot', function () use ($app) {
             $request_params['message'] = 'ты' . ' ' . $insults[$random_insult_number];
 
             // ===== very random things ===== //
-            if (rand(0, 30) == 30) {
+            if (rand(0, 25) == 25) {
                 $random_phrase = [
                     'а в наше время было... Эх',
                     'апчхи!',
                     'есть чё?',
+                    'ты хуже, чем ' . $insults[$random_insult_number],
                     'ты знаешь человека по имени Густов Ган Христиан?',
                     'играл в poorbirds.tk?',
                     'вот мой номер)) Я доступен по телефону +7 (495) 358-35-57 Звони, дорогой)))0))',
@@ -252,10 +256,8 @@ $app->post('/bot', function () use ($app) {
             // ========= YOU OR INSULTS ======== //
             // if user say "you" - send "no, you"
             $no_you = [
-                'нет, ты',
                 'нет',
                 'нет -_-',
-                'нет, ты',
                 'иди нафиг',
                 'иди в зад',
                 'иди в баню',
@@ -724,6 +726,7 @@ $app->post('/bot', function () use ($app) {
             if (
                 (mb_stripos($data->object->body, 'гы') !== false && mb_strlen($data->object->body) === 2) ||
                 mb_stripos($data->object->body, 'гыы') !== false ||
+                mb_stripos($data->object->body, 'гыг') !== false ||
                 mb_stripos($data->object->body, 'ыы') !== false
             ) {
                 $gi = [
@@ -754,7 +757,7 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'занимаешся') !== false ||
                 mb_stripos($data->object->body, 'занимаишся') !== false ||
                 mb_stripos($data->object->body, 'чем занимаешься') !== false ||
-                mb_stripos($data->object->body, 'чем маешься?') !== false ||
+                mb_stripos($data->object->body, 'чем маешься') !== false ||
                 mb_stripos($data->object->body, 'маишься') !== false
             ) {
                 $what_doing = [
@@ -787,14 +790,49 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $what_doing[array_rand($what_doing)];
             }
 
+            if (
+                mb_stripos($data->object->body, 'ты кто') !== false ||
+                mb_stripos($data->object->body, 'кто ты') !== false ||
+                mb_stripos($data->object->body, 'хто ты') !== false ||
+                mb_stripos($data->object->body, 'ты хто') !== false ||
+                mb_stripos($data->object->body, 'тебя зовут') !== false ||
+                mb_stripos($data->object->body, 'тебя завут') !== false ||
+                mb_stripos($data->object->body, 'тибя завут') !== false ||
+                mb_stripos($data->object->body, 'тибя зовут') !== false ||
+                mb_stripos($data->object->body, 'кем работаешь') !== false ||
+                mb_stripos($data->object->body, 'кем работаеш') !== false ||
+                mb_stripos($data->object->body, 'что ты такое') !== false ||
+                mb_stripos($data->object->body, 'ты что такое') !== false
+            ) {
+                $user_info = file_get_contents('https://api.vk.com/method/users.get?' . http_build_query(['user_is' => $data->object->user_id, 'v' => '5.80']));
+
+                $i_am = [
+                    'я Григорий. Работаю в колхозе трактористом и отвечаю на письма фанатов',
+                    // 'я Гриша, 3 высших образования, свой бизнес и дети от твоей мамы',
+                    // 'я Григорий, твой папа',
+                    'я Григорий, учасник общероссийского интеллигентного общества',
+                    // 'я бот-Григорий, люблю мясо и твою маму)',
+                    // 'я Гришка, а ты? Хотя твоя мама говорила, что ты ' . $insults[$random_insult_number],
+                    'я Григорий, а ты ' . $insults[$random_insult_number],
+                    'подержите моё пиво! я Григорий',
+                    'я Гриша, могу мыло помыть',
+                    'я Гриша, раньше в похоронном агенстве работал, теперь тут',
+                    'я Гришка, самый опасный криминальный вор в ' . $user_info['fields']['city'],
+                    'я Гриша, живу в городе' . $user_info['fields']['city'],
+                    'я черепаха-бизмесмен по имени Григорий, а ты ' . $insults[$random_insult_number]
+                ];
+
+                $request_params['message'] = $i_am[array_rand($i_am)];
+            }
 
             // спокойной ночи
             // слабо
-            // Что делаешь, Как тебя зовут, ты кто, григорий
+            // Как тебя зовут, ты кто, григорий
             // Плохо выглядишь, мать жива?
             // Ответ на мать. Мать в канаве
             // Таблетки принимал?
             // Слит
+            // слили, как ботика
             // как узнал, знаешь
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

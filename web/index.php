@@ -1322,7 +1322,7 @@ $app->post('/bot', function () use ($app) {
                 $i_am_bot = [
                     'я робот Григорй, консультант года! что вы ищете? иди в жопу, ' . $insults[$random_insult_number],
                     'я бот Гришка, тракторист, звони, огород перепахаю 8 (800) 201-25-61',
-                    'я бот Григорий в вк. также доступен по телефону 8 (499) 393-39-28',
+                    'я бот Григорий в вк, также доступен по телефону 8 (499) 393-39-28',
                     'Гриша я - черепаха-бот, а ты, я посмотрю, ' . $insults[$random_insult_number],
                     'может это ты бот? я человек, седьмые сутки тут на письма отвечаю',
                     'я бот Григорий, отвечаю на письма фанатов',
@@ -1334,12 +1334,43 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $i_am_bot[array_rand($i_am_bot)];
             }
 
+            // === проснулся === //
+            if (
+                mb_stripos($data->object->body, 'проснулс') !== false ||
+                mb_stripos($data->object->body, 'наконец') !== false ||
+                mb_stripos($data->object->body, 'наканец') !== false ||
+                mb_stripos($data->object->body, 'вернулся') !== false ||
+                mb_stripos($data->object->body, 'вирнулс') !== false ||
+                mb_stripos($data->object->body, 'дождался') !== false ||
+                mb_stripos($data->object->body, 'праснулс') !== false ||
+                mb_stripos($data->object->body, 'пропал') !== false ||
+                mb_stripos($data->object->body, 'прапал') !== false ||
+                mb_stripos($data->object->body, 'не отвечаеш') !== false ||
+                mb_stripos($data->object->body, 'не атвичаеш') !== false ||
+                mb_stripos($data->object->body, 'не атвечаеш') !== false ||
+                mb_stripos($data->object->body, 'не отвичаеш') !== false ||
+                mb_stripos($data->object->body, 'не отвичаиш') !== false ||
+                mb_stripos($data->object->body, 'не атвичаиш') !== false
+            ) {
+                $i_am_back = [
+                    'чет прикимарил',
+                    'я вернулся, ходил в туалет срать',
+                    'а ты переживал? я срать ходил в твой туалет, ' . $insults[$random_insult_number],
+                    'блин, запор, прикинь! что я схавал такого уже?',
+                    'я твоё фото распечатывал, чтобы обосрать его',
+                    'а ты заждался, ' . $insults[$random_insult_number] . '?',
+                    'сори, ' . $insults[$random_insult_number] . ', заждался, наверное',
+                    'не волнуйся, я вернулся, ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $i_am_back[array_rand($i_am_back)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
             // Трубку не берут, не отвечают
             // Хочу
-            // ты чел? ты бот?
             // проснулся
             // правильно - нет
 

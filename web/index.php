@@ -1234,6 +1234,28 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $too[array_rand($too)];
             }
 
+            // === полсе тебя === //
+            if (
+                mb_stripos($data->object->body, 'после тебя') !== false ||
+                mb_stripos($data->object->body, 'после тибя') !== false ||
+                mb_stripos($data->object->body, 'я за тобой') !== false ||
+                mb_stripos($data->object->body, 'я за табой') !== false ||
+                mb_stripos($data->object->body, 'ты первый') !== false ||
+                mb_stripos($data->object->body, 'сначала ты') !== false
+            ) {
+                $after_you = [
+                    'нет, я после вас. я же интеллигент',
+                    'нет, вы первый, я ж интеллигентный Григорий',
+                    'сам иди, я тут посижу',
+                    'может всё-таки ты? я боюсь, а ты как ни как ' . $insults[$random_insult_number],
+                    'я тебя пропускаю',
+                    'я джентельмен, ты вперди',
+                    'я культурный интеллигентный джентельмен-пельмень Григорий. ты первый, на',
+                ];
+
+                $request_params['message'] = $after_you[array_rand($after_you)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
@@ -1242,8 +1264,7 @@ $app->post('/bot', function () use ($app) {
             // Трубку не берут, не отвечают
             // Хочу
             // ты чел? ты бот?
-            // после тебя
-            // тоже
+            // после тебя\
             // проснулся
 
             // Кто твой папа и мама

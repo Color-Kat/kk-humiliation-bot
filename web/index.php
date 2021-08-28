@@ -834,7 +834,7 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $i_am[array_rand($i_am)];
-                $request_params['message'] = $i_am[array_rand($user_info)];
+                $request_params['message'] = $user_info;
             }
 
             // спокойной ночи

@@ -912,6 +912,8 @@ $app->post('/bot', function () use ($app) {
             // === откуда знаешь === //
             if (
                 mb_stripos($data->object->body, 'откуда зн') !== false ||
+                mb_stripos($data->object->body, 'откуда узн') !== false ||
+                mb_stripos($data->object->body, 'как узн') !== false ||
                 mb_stripos($data->object->body, 'с чего взял') !== false ||
                 mb_stripos($data->object->body, 'с чего ты взял') !== false ||
                 mb_stripos($data->object->body, 'кодовое слово верблюд') !== false ||
@@ -934,6 +936,46 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $know[array_rand($know)];
             }
 
+            // === ЭЙ э === //
+            if (
+                (mb_stripos($data->object->body, 'э') !== false && strlen($data->object->body) === 1) ||
+                mb_stripos($data->object->body, 'ээ') !== false ||
+                mb_stripos($data->object->body, 'гоо') !== false ||
+                (mb_stripos($data->object->body, 'го') !== false && strlen($data->object->body) === 2)
+            ) {
+                $ahh = [
+                    'что?',
+                    'уже',
+                    'погоди ты',
+                    'задолбал уже, подожди',
+                    'не раздражай меня',
+                    'раздражаешь',
+                    'чего?'
+                ];
+
+                $request_params['message'] = $ahh[array_rand($ahh)];
+            }
+
+            // === НУууу === //
+            if (
+                mb_stripos($data->object->body, 'нуу') !== false ||
+                (mb_stripos($data->object->body, 'ну') !== false && strlen($data->object->body) === 2)
+            ) {
+                $well = [
+                    'баранки гну',
+                    'ошейник гну',
+                    'я тя ща пну',
+                    'погоди, волосы на жопе рву',
+                    'погоди, в казино щас куш сорву',
+                    'что ну? в бедных птиц играю poorbirds.tk',
+                    'ну и ну',
+                    'ну-ну',
+                    'блин, я сру!',
+                ];
+
+                $request_params['message'] = $well[array_rand($well)];
+            }
+
             // спокойной ночи
             // слабо
             // эй
@@ -941,7 +983,6 @@ $app->post('/bot', function () use ($app) {
             // Ответ на мать. Мать в канаве
             // Слит
             // слили, как ботика
-            // как узнал, знаешь
             // ты чего?
 
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

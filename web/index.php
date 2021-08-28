@@ -1286,13 +1286,39 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $what_want[array_rand($what_want)];
             }
 
+            // === не отвечают === //
+            if (
+                mb_stripos($data->object->body, 'не берут') !== false ||
+                mb_stripos($data->object->body, 'не бирут') !== false ||
+                mb_stripos($data->object->body, 'нет ответа') !== false ||
+                mb_stripos($data->object->body, 'нет атвета') !== false ||
+                mb_stripos($data->object->body, 'не отвечают') !== false ||
+                mb_stripos($data->object->body, 'не атвичают') !== false ||
+                mb_stripos($data->object->body, 'не отвичают') !== false ||
+                mb_stripos($data->object->body, 'занято') !== false ||
+                mb_stripos($data->object->body, 'занята') !== false ||
+                mb_stripos($data->object->body, 'гудки') !== false
+            ) {
+                $not_call_answer = [
+                    'значит заняты',
+                    'значит рабочий день закончился, позвони завтра, ' . $insults[$random_insult_number],
+                    'подожди, перезвонят может',
+                    'странно, обычно сразу отвечают',
+                    'позвони еще раз',
+                    'не может быть такого!',
+                    'так не бывает',
+                    'вооот, а я всегда отвечу, ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $not_call_answer[array_rand($not_call_answer)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
             // Да - чьи-то слова
             // Откликается на имя
             // Трубку не берут, не отвечают
-            // Григорий
             // Хочу
             // ты чел? ты бот?
             // проснулся

@@ -804,7 +804,14 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'что ты такое') !== false ||
                 mb_stripos($data->object->body, 'ты что такое') !== false
             ) {
-                $user_info = file_get_contents('https://api.vk.com/method/users.get?' . http_build_query(['user_is' => $data->object->user_id, 'v' => '5.80']));
+                $user_info = file_get_contents(
+                    'https://api.vk.com/method/users.get?' .
+                        http_build_query([
+                            'user_is' => $data->object->user_id,
+                            'access_token' => getenv('VK_TOKEN'),
+                            'v' => '5.80'
+                        ])
+                );
 
                 $i_am = [
                     'я Григорий. Работаю в колхозе трактористом и отвечаю на письма фанатов',

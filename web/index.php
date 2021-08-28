@@ -231,7 +231,8 @@ $app->post('/bot', function () use ($app) {
 
             // ========= YES YES YES ========= //
             // if user say yes
-            if ((mb_stripos($data->object->body, 'да') !== false ||
+            if (
+                mb_stripos($data->object->body, 'да') !== false ||
                 mb_stripos($data->object->body, 'ага') !== false ||
                 mb_stripos($data->object->body, 'хорошо') !== false ||
                 mb_stripos($data->object->body, 'харашо') !== false ||
@@ -249,7 +250,8 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'кане') !== false ||
                 mb_stripos($data->object->body, 'канэ') !== false ||
                 mb_stripos($data->object->body, 'согласен') !== false ||
-                mb_stripos($data->object->body, 'точно') !== false)) {
+                mb_stripos($data->object->body, 'точно') !== false
+            ) {
                 $yes = [
                     'вот, то-то же',
                     'ага',
@@ -268,6 +270,28 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $yes[array_rand($yes)];
             }
 
+            if (
+                (mb_stripos($data->object->body, 'да') !== false ?? mb_strlen($data->object->body) === 2)
+            ) {
+                $yes_extra = [
+                    'кабзда',
+                    'поезда',
+                    'съешь говна',
+                    'скажу тебе борода',
+                    'конечно',
+                    'сто пудов',
+                    'ага)',
+                    'идиотовы слова',
+                    'я звезда',
+                    'собакины слова',
+                    'крысиные слова',
+                    'ты дурак, да',
+                    'не сомневаюсь'
+                ];
+
+                $request_params['message'] = $yes_extra[array_rand($yes_extra)];
+            }
+
             // ========= YOU OR INSULTS ======== //
             // if user say "you" - send "no, you"
             $no_you = [
@@ -277,7 +301,6 @@ $app->post('/bot', function () use ($app) {
                 'иди в зад',
                 'иди в баню',
                 'иди к черту!',
-                'не обижай меня',
                 'неа)',
                 'ты-ты-ты',
                 'гыыы',
@@ -296,8 +319,27 @@ $app->post('/bot', function () use ($app) {
             ) {
                 $request_params['message'] = $no_you[array_rand($no_you)];
             }
+
+            // === ты - нюхаешь цветы === //
             if (
-                mb_stripos($data->object->body, 'нет') !== false
+                mb_stripos($data->object->body, 'ты') !== false  && mb_strlen($data->object->body) === 2
+            ) {
+                $ass_smell = array_merge([
+                    'жопой нюхаешь цветы',
+                    'попой нюхаешь цветы',
+                    'дыркой нюхаешь кусты',
+                    'ложкой рубишь ты кусты',
+                    'тебе кранты',
+                    'завяжи на жопе ты себе банты',
+                    'задницей сел в цветы'
+                ], $no_you);
+
+                $request_params['message'] = $ass_smell[array_rand($ass_smell)];
+            }
+
+            // === нет - ответ === //
+            if (
+                (mb_stripos($data->object->body, 'нет') !== false && mb_strlen($data->object->body) === 3)
             ) {
                 // no is gay's answer
                 $gay_answer = array_merge($no_you, [
@@ -1045,10 +1087,69 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $lets[array_rand($lets)];
             }
 
+            // === алфавит === //
+            // a
+            if (
+                $data->object->body === 'а' || $data->object->body === 'А'
+            ) {
+                $alphabet_b = [
+                    'б',
+                    'б - тоже витамины',
+                    'б - бобр',
+                    'б - бестыжий',
+                ];
+
+                $request_params['message'] = $alphabet_b[array_rand($alphabet_b)];
+            }
+            // б
+            if (
+                $data->object->body === 'б' || $data->object->body === 'Б'
+            ) {
+                $alphabet_c = [
+                    'в',
+                    'В',
+                    'в - вор',
+                ];
+
+                $request_params['message'] = $alphabet_c[array_rand($alphabet_c)];
+            }
+            // в
+            if (
+                $data->object->body === 'в' || $data->object->body === 'В'
+            ) {
+                $alphabet_d = [
+                    'г',
+                    'Г',
+                    'г - Григорий',
+                ];
+
+                $request_params['message'] = $alphabet_d[array_rand($alphabet_d)];
+            }
+            // г
+            if (
+                $data->object->body === 'г' || $data->object->body === 'Г'
+            ) {
+                $alphabet_e = [
+                    'Г - ГРИГОРИЙ',
+                    'хватит',
+                    'г - Гриша',
+                ];
+
+                $request_params['message'] = $alphabet_e[array_rand($alphabet_e)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
+            // ладно, ясно, понятно
+            // Да - чьи-то слова
+            // Откликается на имя
+            // Трубку не берут, не отвечают
+            // Хочу
+            // хорошо
+            // жопой нюхаешшь цветы
 
+            // Кто твой папа и мама
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));
 
             return 'ok';

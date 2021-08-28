@@ -153,6 +153,7 @@ $app->post('/bot', function () use ($app) {
                 'абориген',
                 'ушлепок',
                 'тапок',
+                'чепушила',
                 // 'плохо выглядишь, мать жива?',
                 // 'что с тобой? мать жива?',
                 // 'что с тобой? мать здорова?',
@@ -506,7 +507,9 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'гей обнаружен') !== false ||
                 // for written errors
                 mb_stripos($data->object->body, 'дор обноружен') !== false ||
-                mb_stripos($data->object->body, 'гей обноружен') !== false
+                mb_stripos($data->object->body, 'дор обнооужен') !== false ||
+                mb_stripos($data->object->body, 'гей обноружен') !== false ||
+                mb_stripos($data->object->body, 'гей обнооужен') !== false
             ) {
                 $request_params['message'] = 'я засекречен, твой анал не вечен)';
             }
@@ -1138,6 +1141,29 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $alphabet_e[array_rand($alphabet_e)];
             }
 
+            // === хорошо === //
+            if (
+                mb_stripos($data->object->body, 'хорошо') !== false ||
+                mb_stripos($data->object->body, 'харашо') !== false ||
+                mb_stripos($data->object->body, 'хор') !== false
+            ) {
+                $good = [
+                    'ну вот и разобрались, что ты ' . $insults[$random_insult_number],
+                    'хорошо, так хорошо',
+                    'понял',
+                    'хорош)',
+                    'а я хорош)',
+                    'всё? уяснил, ' . $insults[$random_insult_number],
+                    'теперь всё понял? ' . $insults[$random_insult_number],
+                    'вот и разобрались',
+                    'фух ,наконец-то до тебя дошло',
+                    'ну вот и всё',
+                    'конец, подпишись на группу, ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $good[array_rand($good)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
@@ -1147,7 +1173,6 @@ $app->post('/bot', function () use ($app) {
             // Трубку не берут, не отвечают
             // Хочу
             // хорошо
-            // жопой нюхаешшь цветы
 
             // Кто твой папа и мама
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

@@ -158,6 +158,9 @@ $app->post('/bot', function () use ($app) {
                 // 'что с тобой? мать жива?',
                 // 'что с тобой? мать здорова?',
                 'тумбочка прикроватная',
+                'осёл',
+                'осел',
+                'ишак',
                 'разве не дурак?',
                 'разве не скотина?',
                 'разве не болен?',
@@ -1241,7 +1244,9 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'я за тобой') !== false ||
                 mb_stripos($data->object->body, 'я за табой') !== false ||
                 mb_stripos($data->object->body, 'ты первый') !== false ||
-                mb_stripos($data->object->body, 'сначала ты') !== false
+                mb_stripos($data->object->body, 'ты снач') !== false ||
+                mb_stripos($data->object->body, 'чало ты') !== false ||
+                mb_stripos($data->object->body, 'чала ты') !== false
             ) {
                 $after_you = [
                     'нет, я после вас. я же интеллигент',
@@ -1256,16 +1261,42 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $after_you[array_rand($after_you)];
             }
 
+            // === Григорий === //
+            if (
+                mb_stripos($data->object->body, 'бот') !== false ||
+                mb_stripos($data->object->body, 'Гриш') !== false ||
+                mb_stripos($data->object->body, 'Григ') !== false ||
+                mb_stripos($data->object->body, 'чел') !== false ||
+                mb_stripos($data->object->body, 'чувак') !== false
+            ) {
+                $what_want = [
+                    'да, слушаю, ' .  $insults[$random_insult_number] . 'что хотел',
+                    'чего надо, ' . $insults[$random_insult_number] . '?',
+                    'что хочешь-то?',
+                    'в долг не даю, наркотой не торгую',
+                    $insults[$random_insult_number] . ', что хочешь?',
+                    'на группу подпишись, ' . $insults[$random_insult_number],
+                    'да, я Григорий, что надо?',
+                    'он самый',
+                    'да, я Гришка, тракторист по вызову 8-800-1000-153',
+                    'что вы хотите? я могу вас послать, идите в зад, ну или к черту',
+                    'если вы хотите смотреть кино - kinofinder.rf.gd если играть - poorbirds.tk а если общаться, то милости уходи, ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $what_want[array_rand($what_want)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика
             // Да - чьи-то слова
             // Откликается на имя
             // Трубку не берут, не отвечают
+            // Григорий
             // Хочу
             // ты чел? ты бот?
-            // после тебя\
             // проснулся
+            // правильно - нет
 
             // Кто твой папа и мама
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

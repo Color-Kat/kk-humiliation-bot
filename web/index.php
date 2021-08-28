@@ -1016,6 +1016,35 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $argue[array_rand($argue)];
             }
 
+            // === ну-ка давай === //
+            if (
+                mb_stripos($data->object->body, 'ну-ка') !== false ||
+                mb_stripos($data->object->body, 'нука') !== false ||
+                mb_stripos($data->object->body, 'нуука') !== false ||
+                mb_stripos($data->object->body, 'давай') !== false ||
+                (mb_stripos($data->object->body, 'го') !== false && mb_strlen($data->object->body) === 2) ||
+                mb_stripos($data->object->body, 'вперед') !== false ||
+                mb_stripos($data->object->body, 'летс') !== false ||
+                mb_stripos($data->object->body, 'lets') !== false ||
+                mb_stripos($data->object->body, "let's") !== false ||
+                mb_stripos($data->object->body, 'попробуй') !== false
+            ) {
+                $lets = [
+                    'алле-оп',
+                    'таадаам',
+                    'ну как тебе? круто?',
+                    'видал как могу?',
+                    'да я вообще всё могу! Даже послать тебя. Иди в жопу',
+                    'пробую..пробую. Иди к черту. уху! получилось',
+                    'фокус: скажи 300',
+                    'погоди, ща покакаю',
+                    'папа против (',
+                    'оп, видал как могу?'
+                ];
+
+                $request_params['message'] = $lets[array_rand($lets)];
+            }
+
             // спокойной ночи
             // Ответ на мать. Мать в канаве
             // Слит, слили, как ботика

@@ -2,6 +2,13 @@
 
 require('../vendor/autoload.php');
 
+function get_env_var($var)
+{
+    $config = json_decode(file_get_contents('./config.json'), true);
+
+    return $config[$var];
+}
+
 $app = new Silex\Application();
 $app['debug'] = true;
 
@@ -14,7 +21,7 @@ $app->get('/', function () use ($app) {
     // putenv("VK_SECRET_TOKEN=JGKDPSksjfKafjLAwiQmck13826fjAK8h18NFi128nc9");
     // putenv("VK_TOKEN=4b6941b14b7f1dd2c85a72a48967a62693f994e78ad65eb586910b473b20c34448828de6dc5db5f550057");
 
-    return 'heroku is the bad hosting' .  getenv('VK_SECRET_TOKEN');
+    return 'heroku is the bad hosting' .  get_env_var('VK_SECRET_TOKEN');
 });
 
 $app->post('/bot', function () use ($app) {
@@ -23,20 +30,20 @@ $app->post('/bot', function () use ($app) {
     if (!$data) return 'nioh';
 
     if (
-        $data->secret !== getenv('VK_SECRET_TOKEN') &&
+        $data->secret !== get_env_var('VK_SECRET_TOKEN') &&
         $data->type !== 'confirmation'
     ) return 'nioh';
 
     switch ($data->type) {
         case 'confirmation':
-            return getenv('VK_CONFIRMATION_CODE');
+            return get_env_var('VK_CONFIRMATION_CODE');
 
         case 'message_new':
             // create response array
             $request_params = [
                 'user_id' => $data->object->user_id,
                 'message' => 'лошара',
-                'access_token' => getenv('VK_TOKEN'),
+                'access_token' => get_env_var('VK_TOKEN'),
                 'v' => '5.80'
             ];
 
@@ -170,7 +177,7 @@ $app->post('/bot', function () use ($app) {
                 'разве не скотина?',
                 'разве не болен?',
                 'болен! Вернись в палату',
-                'тыблетки принимал?',
+                'твблетки принимал?',
                 'в палату вернись-то',
                 'с палаты сбежал?',
                 'шизик',
@@ -194,6 +201,19 @@ $app->post('/bot', function () use ($app) {
                 'снюсоед проклятый',
                 'проклятый',
                 'зануда',
+                'сухобздей',
+                'бомбом',
+                'жаба',
+                'легушка',
+                'шрэк',
+                'жиртрес',
+                'жирный',
+                'дрыщ',
+                'холодец',
+                'холодец застывший',
+                'кишкоблуд',
+                'кишкоблуд поганый',
+                'скотина позорная',
                 'играл в poorbirds.tk ? нет? тогда ты скотина',
                 'простудился, иди сдохни, пж',
                 'как из морга выбрался?'
@@ -829,7 +849,7 @@ $app->post('/bot', function () use ($app) {
                         'https://api.vk.com/method/users.get?' .
                             http_build_query([
                                 'user_id' => $data->object->user_id,
-                                'access_token' => getenv('VK_TOKEN'),
+                                'access_token' => get_env_var('VK_TOKEN'),
                                 'fields' => 'city, country',
                                 'v' => '5.80'
                             ])
@@ -1067,6 +1087,7 @@ $app->post('/bot', function () use ($app) {
                 $yes_extra = [
                     'кабзда',
                     'поезда',
+                    'провода',
                     'съешь говна',
                     'скажу тебе борода',
                     'конечно',

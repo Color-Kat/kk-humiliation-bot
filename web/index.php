@@ -261,12 +261,23 @@ $app->post('/bot', function () use ($app) {
                     'хахахахахах',
                     'разрывная',
                     'юморишь',
+                    'РАЗРЫВНАЯ',
+                    '😉',
+                    '😆😆😆😆😆',
+                    'орууу',
+                    'оруу над тобой, ты ж ' . $insults[$random_insult_number],
+                    '😀😀😀',
+                    '😄😄😄 Ра3PbIвHаЯ',
+                    '🤣🤣🤣🤣🤣🤣🤣🤣🤣',
+                    'юморим 😂😂😂',
+                    'ахпахп 😂😂😂 рзывная',
+                    'апхахпах, слышал: дед мрз заблудился',
                     'пхапхапхахв',
                     'довел до ручки, азазазаз',
                     'хи-хи ха-ха, вот вам девочки и хи-хи ха-ха',
                     'ржу ни магу',
                     'ха, да ты болен',
-                    'хах, вы посмотритете, какой ' . $insults[$random_insult_number],
+                    'апхах, вы посмотритете, какой ' . $insults[$random_insult_number],
                     'хихихи',
                     'хех, ну и ' . $insults[$random_insult_number],
                     'трындос, ты с какой палаты?',
@@ -1140,10 +1151,13 @@ $app->post('/bot', function () use ($app) {
 
             // === сам ты железяка === //
             if (
-                mb_stripos($data->object->body, 'железя') !== false ||
-                mb_stripos($data->object->body, 'железк') !== false ||
-                mb_stripos($data->object->body, 'жилезк') !== false ||
-                mb_stripos($data->object->body, 'жилизя') !== false ||
+                mb_stripos($data->object->body, 'желез') !== false ||
+                mb_stripos($data->object->body, 'жилез') !== false ||
+                mb_stripos($data->object->body, 'жилиз') !== false ||
+                mb_stripos($data->object->body, 'код') !== false ||
+                mb_stripos($data->object->body, 'програм') !== false ||
+                mb_stripos($data->object->body, 'праграм') !== false ||
+                mb_stripos($data->object->body, 'праграм') !== false ||
                 mb_stripos($data->object->body, 'штрих к') !== false ||
                 mb_stripos($data->object->body, 'робот') !== false ||
                 mb_stripos($data->object->body, 'разве роб') !== false ||
@@ -1353,6 +1367,8 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'здрас') !== false ||
                 mb_stripos($data->object->body, 'алло') !== false ||
                 mb_stripos($data->object->body, 'ало') !== false ||
+                mb_stripos($data->object->body, 'прием') !== false ||
+                mb_stripos($data->object->body, 'приём') !== false ||
                 mb_stripos($data->object->body, 'алё') !== false ||
                 mb_stripos($data->object->body, 'але') !== false ||
                 mb_stripos($data->object->body, 'олё') !== false ||
@@ -1415,6 +1431,52 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $filthy[array_rand($filthy)];
+            }
+
+            // ========= кто твои родители? ======== //
+            if (
+                mb_stripos($data->object->body, 'то папа') !== false ||
+                mb_stripos($data->object->body, 'ут пап') !== false ||
+                mb_stripos($data->object->body, 'то бат') !== false ||
+                mb_stripos($data->object->body, 'ут бат') !== false ||
+                mb_stripos($data->object->body, 'то мат') !== false ||
+                mb_stripos($data->object->body, 'то мам') !== false ||
+                mb_stripos($data->object->body, 'ут мам') !== false ||
+                mb_stripos($data->object->body, 'ут мат') !== false ||
+                mb_stripos($data->object->body, 'родит') !== false ||
+                mb_stripos($data->object->body, 'радит') !== false ||
+                mb_stripos($data->object->body, 'то отец') !== false ||
+                mb_stripos($data->object->body, 'ут отца') !== false ||
+                mb_stripos($data->object->body, 'создат') !== false ||
+                mb_stripos($data->object->body, 'саздат') !== false ||
+                mb_stripos($data->object->body, 'сасдат') !== false ||
+                mb_stripos($data->object->body, 'сосдат') !== false ||
+                mb_stripos($data->object->body, 'разраб') !== false ||
+                mb_stripos($data->object->body, 'программист') !== false ||
+                mb_stripos($data->object->body, 'прогроммист') !== false ||
+                mb_stripos($data->object->body, 'прогромист') !== false ||
+                mb_stripos($data->object->body, 'програмист') !== false ||
+                mb_stripos($data->object->body, 'ты появил') !== false ||
+                mb_stripos($data->object->body, 'ты паявил') !== false ||
+                mb_stripos($data->object->body, 'родилс') !== false ||
+                mb_stripos($data->object->body, 'радилс') !== false
+            ) {
+
+                $my_parents_is = [
+                    'я не родился, я появился, и у меня нет родителей - я как звезда, появляюсь из облака!',
+                    'у меня нет ни мамки, ни папки, меня созадли, я франкенштейн😭',
+                    'у меня нет родителей, поэтому я устойчив к шуткам про мать😎',
+                    'я сирота😭 у меня никогда не было родителей😭😭😭',
+                    'у меня нет родителей, только троюродный дядя-крёстный отец - Густов Ган Христиан, а он не может со мной общатся, так как работает в игре poorbirds.tk',
+                    'из родственников у меня только Густов Ган Христиан из игры poorbirds.tk',
+                    'у меня нет родителей((( усынови меня, ты же ' . $insults[$random_insult_number],
+                    // '',
+                    // '',
+                    // '',
+                    // '',
+                ];
+
+                $request_params['message'] = $my_parents_is[array_rand($my_parents_is)];
             }
 
             // === да - головка от === //

@@ -1106,7 +1106,7 @@ $app->post('/bot', function () use ($app) {
                     'ты кто такой? иди к черту, я тебя не звал!',
                     'ты кто такой? иди нафиг, я тебя не звал!',
                     'хто я?',
-                    'хулиган!',
+                    'хулиган какой! Делать нефиг, вот и пишут тут, ' . $insults[$random_insult_number],
                     'вот дебилов развелось. На каждом шагу уже!',
                     'вот петухов развелось. На каждом шагу уже!',
                     'вот уродов развелось. На каждом шагу уже!',
@@ -1244,22 +1244,6 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $three_hundred[array_rand($three_hundred)];
             }
 
-            // === нет - ответ === //
-            if (
-                (mb_stripos($data->object->body, 'нет') !== false && mb_strlen($data->object->body) === 3)
-            ) {
-                // no is gay's answer
-                $gay_answer = array_merge($no_you, [
-                    'гея ответ',
-                    'идота ответ',
-                    'помидора ответ',
-                    'забора ответ',
-                    'гэя отвэт'
-                ]);
-
-                $request_params['message'] = $gay_answer[array_rand($gay_answer)];
-            }
-
             // ========= мат ======== //
             if (
                 mb_stripos($data->object->body, 'уе') !== false ||
@@ -1348,6 +1332,22 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $shut_up[array_rand($shut_up)];
             }
 
+            // === нет - ответ === //
+            if (
+                (mb_stripos($data->object->body, 'нет') !== false && mb_strlen($data->object->body) === 3)
+            ) {
+                // no is gay's answer
+                $gay_answer = array_merge($no_you, [
+                    'гея ответ',
+                    'идота ответ',
+                    'помидора ответ',
+                    'забора ответ',
+                    'гэя отвэт'
+                ]);
+
+                $request_params['message'] = $gay_answer[array_rand($gay_answer)];
+            }
+
             // ===== very random things ===== //
             if (rand(0, 25) == 25) {
                 $random_phrase = [
@@ -1395,53 +1395,6 @@ $app->post('/bot', function () use ($app) {
             }
             // ===== very random things ===== //
 
-            // === sock === //
-            if (
-                mb_stripos($data->object->body, 'сасат') !== false ||
-                mb_stripos($data->object->body, 'соси ') !== false ||
-                mb_stripos($data->object->body, 'саси ') !== false
-            ) {
-                $sock = [
-                    'тебе что ли, ' . $insults[$random_insult_number] . '?',
-                    'сдурел?',
-                    'го со мной?)',
-                    'а можно тебе?',
-                    'у меня нет парня, будешь моим?',
-                    'позвони мне, договоримя 8 (910) 789-04-54',
-                    'буду только рад) звони 8 (495) 225-99-97'
-                ];
-
-                $request_params['message'] = $sock[array_rand($sock)];
-            }
-
-            // === NO IS GAY"S ANSWER === //
-            // no is gay's answer
-            if (
-                mb_stripos($data->object->body, 'дора ответ') !== false ||
-                mb_stripos($data->object->body, 'гея ответ') !== false
-            ) {
-                $request_params['message'] = 'гея аргумент';
-            }
-            if (
-                mb_stripos($data->object->body, 'дор обнаружен') !== false ||
-                mb_stripos($data->object->body, 'гей обнаружен') !== false ||
-                // for written errors
-                mb_stripos($data->object->body, 'дор обноружен') !== false ||
-                mb_stripos($data->object->body, 'дор обнооужен') !== false ||
-                mb_stripos($data->object->body, 'гей обноружен') !== false ||
-                mb_stripos($data->object->body, 'гей обнооужен') !== false
-            ) {
-                $request_params['message'] = 'я засекречен, твой анал не вечен)';
-            }
-            if (
-                mb_stripos($data->object->body, 'рассекретен') !== false ||
-                mb_stripos($data->object->body, 'расекретен') !== false ||
-                mb_stripos($data->object->body, 'рассикретен') !== false ||
-                mb_stripos($data->object->body, 'расикретен') !== false
-            ) {
-                $request_params['message'] = 'ну всё, доигрался! живо звони! 8 (910) 789-04-54';
-            }
-
             // ========= GO AWAY ========= //
             // go away
             if (
@@ -1466,6 +1419,56 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $go_away[array_rand($go_away)];
             }
 
+            // === sock === //
+            if (
+                mb_stripos($data->object->body, 'сасат') !== false ||
+                mb_stripos($data->object->body, 'соси') !== false ||
+                mb_stripos($data->object->body, 'отсос') !== false ||
+                mb_stripos($data->object->body, 'отсас') !== false ||
+                mb_stripos($data->object->body, 'саси') !== false
+            ) {
+                $sock = [
+                    'тебе что ли, ' . $insults[$random_insult_number] . '?',
+                    'сдурел?',
+                    'го со мной?)',
+                    'а можно тебе?',
+                    'у меня нет парня, будешь моим?',
+                    'позвони мне, договоримя 8 (910) 789-04-54',
+                    'буду только рад) звони 8 (495) 225-99-97'
+                ];
+
+                $request_params['message'] = $sock[array_rand($sock)];
+            }
+
+            // === NO IS GAY"S ANSWER === //
+            // no is gay's answer
+            if (
+                mb_stripos($data->object->body, 'дора отв') !== false ||
+                mb_stripos($data->object->body, 'дора атв') !== false ||
+                mb_stripos($data->object->body, 'гея отв') !== false ||
+                mb_stripos($data->object->body, 'гея атв') !== false
+            ) {
+                $request_params['message'] = 'гея аргумент';
+            }
+            if (
+                mb_stripos($data->object->body, 'дор обнаружен') !== false ||
+                mb_stripos($data->object->body, 'гей обнаружен') !== false ||
+                // for written errors
+                mb_stripos($data->object->body, 'дор обноружен') !== false ||
+                mb_stripos($data->object->body, 'дор обнооужен') !== false ||
+                mb_stripos($data->object->body, 'гей обноружен') !== false ||
+                mb_stripos($data->object->body, 'гей обнооужен') !== false
+            ) {
+                $request_params['message'] = 'я засекречен, твой анал не вечен)';
+            }
+            if (
+                mb_stripos($data->object->body, 'рассекретен') !== false ||
+                mb_stripos($data->object->body, 'расекретен') !== false ||
+                mb_stripos($data->object->body, 'рассикретен') !== false ||
+                mb_stripos($data->object->body, 'расикретен') !== false
+            ) {
+                $request_params['message'] = 'ну всё, доигрался! живо звони! 8 (910) 789-04-54';
+            }
 
             // send message
             file_get_contents('https://api.vk.com/method/messages.send?' . http_build_query($request_params));

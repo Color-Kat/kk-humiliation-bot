@@ -1138,7 +1138,7 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
             }
 
-            // === сам ты железяка
+            // === сам ты железяка === //
             if (
                 mb_stripos($data->object->body, 'железя') !== false ||
                 mb_stripos($data->object->body, 'железк') !== false ||

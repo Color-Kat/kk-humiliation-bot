@@ -208,6 +208,7 @@ $app->post('/bot', function () use ($app) {
                 'снюсоед проклятый',
                 'проклятый',
                 'зануда',
+                'просто пушечное мясо',
                 'сухобздей',
                 'бомбом',
                 'жопа',
@@ -254,7 +255,7 @@ $app->post('/bot', function () use ($app) {
                 'корова',
                 'козел, я изнасилую тебя и всю твою семью, понял??',
                 'козлина',
-                'дядя хруша',
+                'дядя хрюша',
                 'тухлая груша',
                 'неспелый арбуз',
                 'раб',
@@ -271,6 +272,8 @@ $app->post('/bot', function () use ($app) {
                 'нищий крестьянин',
                 'стыдливое животное',
                 'посмешище',
+                'кабель',
+                'кабелина',
                 'не можешь меня победить, лошара',
                 'кушаешь говно',
                 'бедный Демьян',
@@ -285,7 +288,10 @@ $app->post('/bot', function () use ($app) {
                 'жиртрес',
                 'жирный',
                 'дрыщ',
+                'овощь',
                 'жопализ',
+                'жирный хряк',
+                'хряк',
                 'холодец',
                 'холодец застывший',
                 'кишкоблуд',
@@ -922,9 +928,32 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $soo_2[array_rand($soo_2)];
             }
 
+            // === повтор === //
+            if (
+                mb_stripos($data->object->body, 'повтор') !== false ||
+                mb_stripos($data->object->body, 'павтор') !== false
+            ) {
+                $repeat = [
+                    'закрутился в жопе мотор',
+                    'я, блин, тор',
+                    'у тебя в жопе такой затор',
+                    'в твоей жопе такой простор',
+                    'у тебя в мозге кратор',
+                    'в моторе есть ротор и статор',
+                    'внимание! мотор!',
+                    'ну ты таратор!',
+                ];
+
+                $request_params['message'] = $repeat[array_rand($repeat)];
+            }
+
             // === было уже === //
             if (
                 mb_stripos($data->object->body, 'было') !== false ||
+                mb_stripos($data->object->body, 'повторя') !== false ||
+                mb_stripos($data->object->body, 'павторя') !== false ||
+                mb_stripos($data->object->body, 'повтаря') !== false ||
+                mb_stripos($data->object->body, 'павтаря') !== false ||
                 mb_stripos($data->object->body, 'говорил уж') !== false ||
                 mb_stripos($data->object->body, 'говорил уд') !== false ||
                 mb_stripos($data->object->body, 'гаварил уж') !== false ||
@@ -948,55 +977,6 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $already_was[array_rand($already_was)];
-            }
-
-            // === повтор === //
-            if (
-                mb_stripos($data->object->body, 'повтор') !== false ||
-                mb_stripos($data->object->body, 'павтор') !== false
-            ) {
-                $repeat = [
-                    'закрутился в жопе мотор',
-                    'я, блин, тор',
-                    'у тебя в жопе такой затор',
-                    'в твоей жопе такой простор',
-                    'у тебя в мозге кратор',
-                    'в моторе есть ротор и статор',
-                    'внимание! мотор!',
-                    'ну ты таратор!',
-                ];
-
-                $request_params['message'] = $repeat[array_rand($repeat)];
-            }
-
-            // === я ем === //
-            if (
-                (mb_stripos($data->object->body, 'ем') !== false && mb_strlen($data->object->body) === 2) ||
-                mb_stripos($data->object->body, 'ем ') !== false ||
-                mb_stripos($data->object->body, ' ем') !== false ||
-                mb_stripos($data->object->body, 'куша') !== false ||
-                mb_stripos($data->object->body, 'кцша') !== false ||
-                mb_stripos($data->object->body, 'жру') !== false ||
-                mb_stripos($data->object->body, 'еда') !== false ||
-                mb_stripos($data->object->body, 'еду') !== false ||
-                mb_stripos($data->object->body, 'у есть') !== false ||
-                mb_stripos($data->object->body, 'л есть') !== false ||
-                mb_stripos($data->object->body, 'жрат') !== false
-            ) {
-                $eat = [
-                    'приятного аппетита, говной не подавись',
-                    'не подавись, ' . $insults[$random_insult_number],
-                    'аккуртнее, в еде яд',
-                    'жуй хорошо',
-                    'помочь разжевать?',
-                    'жевать умеешь?',
-                    'вкусно тебе, ' . $insults[$random_insult_number] . '?',
-                    'подожди, пока остынет',
-                    'по статистике, ты подавишься',
-                    'только не подавись, я тебя прошу, кого я потом буду так любить и лелеять?',
-                ];
-
-                $request_params['message'] = $eat[array_rand($eat)];
             }
 
             // ============= неважные фразы ============= //    
@@ -1197,6 +1177,8 @@ $app->post('/bot', function () use ($app) {
             if (
                 mb_stripos($data->object->body, 'пока') !== false ||
                 mb_stripos($data->object->body, 'до свид') !== false ||
+                mb_stripos($data->object->body, 'побежал') !== false ||
+                mb_stripos($data->object->body, 'пабежал') !== false ||
                 mb_stripos($data->object->body, 'до свед') !== false ||
                 mb_stripos($data->object->body, 'дасви') !== false ||
                 mb_stripos($data->object->body, 'дасве') !== false ||
@@ -1232,6 +1214,8 @@ $app->post('/bot', function () use ($app) {
                     'вот и закончили на том, что ты ' . $insults[$random_insult_number],
                     'спокойной ночи, ' . $insults[$random_insult_number],
                     'слился)',
+                    'ладно, я тоже пошел',
+                    'и я тоже побежал',
                     'пакеды, на группу подпишись, ' . $insults[$random_insult_number],
                     'вот это диалог! я даже не вспотел, ' . $insults[$random_insult_number] . 'до завтра, на группу подпишись обязательно',
                     'ценок, подпишись, ' . $insults[$random_insult_number],
@@ -1426,7 +1410,10 @@ $app->post('/bot', function () use ($app) {
             if (
                 mb_stripos($data->object->body, 'мать') !== false ||
                 mb_stripos($data->object->body, 'мам') !== false ||
-                mb_stripos($data->object->body, 'бат') !== false ||
+                mb_stripos($data->object->body, ' бат') !== false ||
+                mb_stripos($data->object->body, 'батю') !== false ||
+                mb_stripos($data->object->body, 'батя') !== false ||
+                mb_stripos($data->object->body, 'батьк') !== false ||
                 mb_stripos($data->object->body, 'пап') !== false ||
                 mb_stripos($data->object->body, 'отец') !== false ||
                 mb_stripos($data->object->body, 'родите') !== false ||
@@ -1975,6 +1962,9 @@ $app->post('/bot', function () use ($app) {
                     'cлово «ситуация» смотреть в словаре между «сиськой» и «сифилисом».',
                     'иди на помойку',
                     'есть чё?',
+                    'скажи ёж)',
+                    'скажи родильный дом',
+                    'скажи паравозик',
                     'ты хуже, чем ' . $insults[$random_insult_number],
                     'ты знаешь человека по имени Густов Ган Христиан?',
                     'играл в poorbirds.tk?',
@@ -1987,7 +1977,7 @@ $app->post('/bot', function () use ($app) {
                     'что происходит?',
                     'эм, что происходит',
                     'стой, а не, нормас',
-                    'мм? а что проиходит?',
+                    'мм? а что происходит?',
                     'может и так',
                     'странно',
                     'Жил-был маленький Паровозик, который смог. И вот однажды в глубине джунглей он ехал во вражеский тыл — чих-чих-чих-чих, чих-чих-чих-чих, тюууу-тюууу! Паровозику был дан приказ доставить ящики с винтовками М-16 и боеприпасы на плацдарм, который оборонял 263 батальон. Надо ли говорить, что врагов кругом была тьма тьмущая. Думаешь, это остановило Паровозика, который Смог? Да черта с два! Он ехал себе и ехал — чих-чих-чих-чих, чих-чих-чих-чих, тюууу-тюууу! Даже когда враги залезли в кабину и выдавили глаза машинисту. У того кровища течет вперемешку с соплями. Но, думаешь, это остановило Паровозика? Правильно! Он так и ехал дальше — чих-чих-чих-чих, чих-чих-чих-чих, тюууу-тюууу!
@@ -2069,6 +2059,47 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $go_away[array_rand($go_away)];
+            }
+
+            // === я ем === //
+            if (
+                (mb_stripos($data->object->body, 'ем') !== false && mb_strlen($data->object->body) === 2) ||
+                mb_stripos($data->object->body, 'ем ') !== false ||
+                mb_stripos($data->object->body, ' ем') !== false ||
+                mb_stripos($data->object->body, 'куша') !== false ||
+                mb_stripos($data->object->body, 'кцша') !== false ||
+                mb_stripos($data->object->body, 'жру') !== false ||
+                mb_stripos($data->object->body, 'еда') !== false ||
+                mb_stripos($data->object->body, 'еду') !== false ||
+                mb_stripos($data->object->body, 'у есть') !== false ||
+                mb_stripos($data->object->body, 'есть п') !== false ||
+                mb_stripos($data->object->body, 'есть и') !== false ||
+                mb_stripos($data->object->body, 'есть б') !== false ||
+                mb_stripos($data->object->body, 'л есть') !== false ||
+                mb_stripos($data->object->body, 'жрат') !== false
+            ) {
+                $eat = [
+                    'приятного аппетита, говной не подавись',
+                    'не подавись, ' . $insults[$random_insult_number],
+                    'аккуртнее, в еде яд',
+                    'жуй хорошо',
+                    'помочь разжевать?',
+                    'жевать умеешь?',
+                    'вкусно тебе, ' . $insults[$random_insult_number] . '?',
+                    'подожди, пока остынет',
+                    'по статистике, ты подавишься',
+                    'только не подавись, я тебя прошу, кого я потом буду так любить и лелеять?',
+                ];
+
+                $request_params['message'] = $eat[array_rand($eat)];
+            }
+
+            // === про ежа === //
+            if (
+                mb_stripos($data->object->body, 'ёж') !== false ||
+                mb_stripos($data->object->body, 'еж') !== false
+            ) {
+                $request_params['message'] = 'жил когда-то ёжик - ни головы не ножек. Но нос был, да и тот отваливался иногда. И, однажды, смышлёный заяц это увидел и подсказал ёжику научиться дышать другим местом! Ёж сразу смекнул, каким местом. И приступил к тренировкам! Он долго и упорно тренировался и наконец у него получилось. Ёжик попой научился дышать! ВСему лесу рассказал - никто не поверил. Тогда ёжик представление решил закатить. Весь лес собрался, смотрят: ёжик отрывает нос, так как он ему больше не понадобится! Все ахнули, а ёжик снял штаны и как давай жопой вилять, все диву дались! А потом ему смышлёный заяц говорит: "Дядя ёжик, присядь на пенёк, ты, наверное, устал уже". Ну ёж и сел. Сел напенёк, да задохнулся! Скорая приехала, хотела искуственное дыхание сделать, да решили не делать...';
             }
 
             // === про роды кошки === //

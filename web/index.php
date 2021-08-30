@@ -237,6 +237,7 @@ $app->post('/bot', function () use ($app) {
                 'бешеная крыса',
                 'бывший зек',
                 'с помойки',
+                'абобусовидный',
                 'роды у кошки принимал когда-нибудь? я как-то принимал один раз... рассказать? напиши "родильный дом"',
                 'легушка',
                 'ублюдок, мать твою, а ну иди сюда, говно собачье, а ну решил ко мне лезть? ты засранец вонючий, мать твою. АА? ну иди сюда, попробуй меня тронуть, я тебя сам трону! гад чертов, будь ты проклят, идиот, изнасилую тебя и всю твою семью, гавно собачье, жлоб вонючий! дерьмо! скотина! падла, иди сюда, мерзавец-негодяй, гад, иди сюда ты говно, жопа',
@@ -852,6 +853,50 @@ $app->post('/bot', function () use ($app) {
 
                 $request_params['message'] = $uuuu[array_rand($uuuu)];
             }
+
+            // === воо === //
+            if (
+                (mb_stripos($data->object->body, 'во') !== false && mb_strlen($data->object->body) === 2) ||
+                (mb_stripos($data->object->body, 'воо') !== false && mb_strlen($data->object->body) === 3) ||
+                mb_stripos($data->object->body, 'вооо') !== false
+            ) {
+                $soo = [
+                    'вот так-то',
+                    'вот-вот',
+                    'щас пошлю вот-вот',
+                    'любишь пиво?',
+                    'тут так красиво',
+                    'подержи моё пиво',
+                    'в жопе сиво',
+                    'ты себя ведешь так плаксиво'
+                ];
+
+                $request_params['message'] = $soo[array_rand($soo)];
+            }
+
+            // === вот === //
+            if (
+                (mb_stripos($data->object->body, 'вот') !== false && mb_strlen($data->object->body) === 3) ||
+                (mb_stripos($data->object->body, 'воот') !== false && mb_strlen($data->object->body) === 4) ||
+                (mb_stripos($data->object->body, 'вооот') !== false && mb_strlen($data->object->body) === 5) ||
+                (mb_stripos($data->object->body, 'воооот') !== false && mb_strlen($data->object->body) === 6) ||
+                (mb_stripos($data->object->body, 'вооооот') !== false && mb_strlen($data->object->body) === 7) ||
+                (mb_stripos($data->object->body, 'воооооот') !== false && mb_strlen($data->object->body) === 8)
+            ) {
+                $soo_2 = [
+                    'cо лба уже стекает пот?',
+                    'а я кот)',
+                    'захлопни свой рот!',
+                    'это джекпот!',
+                    'я в этом деле знаток',
+                    'закрой свой рот, ' . $insults[$random_insult_number],
+                    'дяденька полицейски, обижал меня человек вон тот!',
+                    'кто тебя ко мне всё шлёт?',
+                ];
+
+                $request_params['message'] = $soo_2[array_rand($soo_2)];
+            }
+
 
             // ============= неважные фразы ============= //    
 
@@ -1529,7 +1574,7 @@ $app->post('/bot', function () use ($app) {
                 $four_hundred = [
                     'ты больной? 300 скажи, а не 400',
                     'оторви Иисуса от креста',
-                    'поцелуй атихриста',
+                    'поцелуй антихриста',
                     'я тут староста',
                     'не придумал ничего, поэтому тут нет текста',
                     'мать твоя ущелиста',

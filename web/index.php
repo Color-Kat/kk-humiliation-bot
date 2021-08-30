@@ -865,6 +865,7 @@ $app->post('/bot', function () use ($app) {
                     'вот-вот',
                     'щас пошлю вот-вот',
                     'любишь пиво?',
+                    'не красиво',
                     'тут так красиво',
                     'подержи моё пиво',
                     'в жопе сиво',
@@ -1295,6 +1296,30 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $it_is_you[array_rand($it_is_you)];
+            }
+
+            // === что делаешь? === //
+            if (
+                mb_stripos($data->object->body, 'то скаж') !== false ||
+                mb_stripos($data->object->body, 'то сквж') !== false ||
+                mb_stripos($data->object->body, 'че скаж') !== false ||
+                mb_stripos($data->object->body, 'чё скаж') !== false ||
+                mb_stripos($data->object->body, 'во скаж') !== false ||
+                mb_stripos($data->object->body, 'го скаж') !== false
+            ) {
+                $what_say = [
+                    'скажу, что ты ' . $insults[$random_insult_number],
+                    'я просто промолчу, ' . $insults[$random_insult_number],
+                    'я думаю это гениально, если считать, что ты ' . $insults[$random_insult_number],
+                    'а вот ничего не скажу',
+                    'сказалбы, что ты классный человек, но ты ' . $insults[$random_insult_number],
+                    'я скажу, что тебе стоит подписаться на меня и сыграть в poorbirds.tk (это моя игра)',
+                    'и чказать нечего',
+                    'хрень это всё полная',
+                    'мда, такое себе...',
+                ];
+
+                $request_params['message'] = $what_say[array_rand($what_say)];
             }
 
             // === шутки про маму === //

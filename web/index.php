@@ -2061,6 +2061,24 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $go_away[array_rand($go_away)];
             }
 
+            // === реклама === //
+            if (
+                mb_stripos($data->object->body, 'рекл') !== false ||
+                mb_stripos($data->object->body, 'рикла') !== false ||
+                mb_stripos($data->object->body, 'пиар') !== false ||
+                mb_stripos($data->object->body, 'пяр') !== false
+            ) {
+                $ad = [
+                    'Это не реклама, это мой же проект. Раньше были richbirds, я сделал похожую игру, но она похожа только птицамии яйцами
+                    а так там куча все нового, даже биткойн можно купить по реальному курсу!',
+                    'Реклама - это когда твою мамку в 300м от тебя показывают, а это мой же проект. Раньше были richbirds, я сделал похожую игру, но она похожа только птицамии яйцами
+                    а так там куча все нового, даже биткойн можно купить по реальному курсу!',
+                    'Это мой же проект, зайди почитай подробнее)'
+                ];
+
+                $request_params['message'] = $ad[array_rand($ad)];
+            }
+
             // === я ем === //
             if (
                 (mb_stripos($data->object->body, 'ем') !== false && mb_strlen($data->object->body) === 2) ||

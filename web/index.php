@@ -80,18 +80,15 @@ $app->post('/bot', function () use ($app) {
                 'тупой',
                 'срань',
                 'засранец',
-                'засранец',
                 'свинья',
                 'жертва оборта',
                 'жертва оборта',
                 'высер',
                 'сцыкун',
                 'гад ползучий',
-                'гад ползучий',
                 'скупердяй',
                 'жадоба',
                 'алочный',
-                'тупой',
                 'глупый',
                 'идиот',
                 'даун',
@@ -1913,6 +1910,33 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $hi[array_rand($hi)];
+            }
+
+            // === кто обзывается. тот сам так называется === //
+            if (
+                mb_stripos($data->object->body, 'м так наз') !== false ||
+                mb_stripos($data->object->body, 'м так зов') !== false ||
+                mb_stripos($data->object->body, 'зеркал') !== false ||
+                mb_stripos($data->object->body, 'зеркол') !== false ||
+                mb_stripos($data->object->body, 'бя посмот') !== false ||
+                mb_stripos($data->object->body, 'бя пасмот') !== false ||
+                mb_stripos($data->object->body, 'бя пасмат') !== false ||
+                mb_stripos($data->object->body, 'бя посмат') !== false
+            ) {
+                $mirror = [
+                    'я считаю себя аристакратом, в отличии от тебя',
+                    'я участник общероссийского интеллигентного общеста аристакратов',
+                    'ты втираешь мне какаую-то дичь',
+                    'просто прими данное, ты ' . $insults[$random_insult_number],
+                    'я молодец, а ты огурец',
+                    'я молодец, а ты холодец',
+                    'ты успокойся и пойми, что я не такой, Гриша хороший, а ты ' . $insults[$random_insult_number],
+                    'чего же тогда меня твоя мама так любит?',
+                    'это не мешает твоей маме встречаться со мной))0)))',
+                    'да не, я нормльный...',
+                ];
+
+                $request_params['message'] = $mirror[array_rand($mirror)];
             }
 
             // ========= мат ======== //

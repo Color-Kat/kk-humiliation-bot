@@ -313,12 +313,18 @@ $app->post('/bot', function () use ($app) {
                 'невежда',
                 'неуч',
                 'филичпок',
+                'энергетический вампир',
                 'вшивая блоха',
                 'липовые справки о вакцинировании выдаешь?',
                 'левые паспорта делаешь!',
                 'шутишь плохо',
                 'плохой шутник',
                 'жирный',
+                'обосок',
+                'дикий монах',
+                'облезший БОМЖ',
+                'дед бомбом',
+                'под поездом валяешься',
                 'дрыщ',
                 'овощь',
                 'жопализ',
@@ -1168,6 +1174,13 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'праснулс') !== false ||
                 mb_stripos($data->object->body, 'пропал') !== false ||
                 mb_stripos($data->object->body, 'прапал') !== false ||
+                mb_stripos($data->object->body, 'твичаеш') !== false ||
+                mb_stripos($data->object->body, 'твичаиш') !== false ||
+                mb_stripos($data->object->body, 'твечаеш') !== false ||
+                mb_stripos($data->object->body, 'твечаиш') !== false ||
+                mb_stripos($data->object->body, 'замолк') !== false ||
+                mb_stripos($data->object->body, 'слит') !== false ||
+                mb_stripos($data->object->body, 'зомолк') !== false ||
                 mb_stripos($data->object->body, 'не отвечаеш') !== false ||
                 mb_stripos($data->object->body, 'не атвичаеш') !== false ||
                 mb_stripos($data->object->body, 'не атвечаеш') !== false ||
@@ -1184,6 +1197,12 @@ $app->post('/bot', function () use ($app) {
                     'а ты заждался, ' . $insults[$random_insult_number] . '?',
                     'сори, ' . $insults[$random_insult_number] . ', заждался, наверное',
                     'не волнуйся, я вернулся, ' . $insults[$random_insult_number],
+                    'заждался небось, я у твоей мамы дома был',
+                    'фух, лну твоя мама огонь, конечно)',
+                    'сори, у твой мамы засиделся',
+                    'сори, ' . $insults[$random_insult_number] . ', ты устал ждать, наверное?',
+                    'подожди, твоя мама еще насытилась)))',
+                    'ждать не вредно, подождешь и еще',
                 ];
 
                 $request_params['message'] = $i_am_back[array_rand($i_am_back)];

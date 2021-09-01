@@ -1634,6 +1634,33 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $what_say[array_rand($what_say)];
+            }
+
+            // === школа === //
+            if (
+                mb_stripos($data->object->body, 'школа') !== false ||
+                mb_stripos($data->object->body, 'шкила') !== false ||
+                mb_stripos($data->object->body, 'шкала') !== false ||
+                mb_stripos($data->object->body, 'школу') !== false ||
+                mb_stripos($data->object->body, 'сентябрь') !== false ||
+                mb_stripos($data->object->body, 'линейка') !== false ||
+                mb_stripos($data->object->body, 'звонок') !== false
+            ) {
+                $school = [
+                    'вот дерьмо, удачи, ' . $insults[$random_insult_number],
+                    'а я бот) мне в школу не надо, азазаз ))0)010101)',
+                    'мда, фигово, но ты дерзай, уроки делалй, школота',
+                    'поздравляю, а я не учусь, я всё умею',
+                    'а мне учится не надо, я всё умею)',
+                    'дерзай, школоло',
+                    'шкильник?',
+                    'в школу тебе, да? А я каменьшик! НЕДЕЛЮ РАБОТАЮ БЕЗ ЗАРПЛАТЫ',
+                    'мда, повесся, легче станет',
+                    'гворят, что если ходить в школу через окно, то будет проще учится'
+                ];
+
+                $request_params['message'] = $school[array_rand($school)];
+            }
 
             // === ты - нюхаешь цветы === //
             if (

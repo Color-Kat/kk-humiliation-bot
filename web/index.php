@@ -1178,8 +1178,23 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'твичаиш') !== false ||
                 mb_stripos($data->object->body, 'твечаеш') !== false ||
                 mb_stripos($data->object->body, 'твечаиш') !== false ||
+                mb_stripos($data->object->body, 'е пишеш') !== false ||
+                mb_stripos($data->object->body, 'е пишиш') !== false ||
+                mb_stripos($data->object->body, 'е говор') !== false ||
+                mb_stripos($data->object->body, 'е гавар') !== false ||
+                mb_stripos($data->object->body, 'е гавор') !== false ||
+                mb_stripos($data->object->body, 'е говар') !== false ||
                 mb_stripos($data->object->body, 'замолк') !== false ||
                 mb_stripos($data->object->body, 'слит') !== false ||
+                mb_stripos($data->object->body, 'ы где') !== false ||
+                mb_stripos($data->object->body, 'пропал') !== false ||
+                mb_stripos($data->object->body, 'прапал') !== false ||
+                mb_stripos($data->object->body, 'исчез') !== false ||
+                mb_stripos($data->object->body, 'исчес') !== false ||
+                mb_stripos($data->object->body, 'ищез') !== false ||
+                mb_stripos($data->object->body, 'ишез') !== false ||
+                mb_stripos($data->object->body, 'ишес') !== false ||
+                mb_stripos($data->object->body, 'ищес') !== false ||
                 mb_stripos($data->object->body, 'зомолк') !== false ||
                 mb_stripos($data->object->body, 'не отвечаеш') !== false ||
                 mb_stripos($data->object->body, 'не атвичаеш') !== false ||
@@ -1190,6 +1205,7 @@ $app->post('/bot', function () use ($app) {
             ) {
                 $i_am_back = [
                     'чет прикимарил',
+                    'я нашёлся',
                     'я вернулся, ходил в туалет срать',
                     'а ты переживал? я срать ходил в твой туалет, ' . $insults[$random_insult_number],
                     'блин, запор, прикинь! что я схавал такого уже?',

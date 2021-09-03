@@ -26,6 +26,7 @@ $app->get('/', function () use ($app) {
 
 $app->post('/bot', function () use ($app) {
     $data = json_decode(file_get_contents('php://input'));
+    $jokes_file = './jokes.json';
 
     if (!$data) return 'nioh';
 
@@ -324,6 +325,15 @@ $app->post('/bot', function () use ($app) {
                 'невежа',
                 'невежда',
                 'неуч',
+                'смертельно туп',
+                'труп',
+                'утопленник',
+                'в манку вымазался',
+                'срамник',
+                'бессовестный чербурек',
+                'печенег',
+                'монгол',
+                'туберкулёзник',
                 'филичпок',
                 'энергетический вампир',
                 'вшивая блоха',
@@ -2107,7 +2117,7 @@ $app->post('/bot', function () use ($app) {
 
             // ======== LONG TEXT ========= //
             if (
-                mb_strlen($data->object->body) > 69
+                mb_strlen($data->object->body) > 59
             ) {
                 $shut_up = [
                     'заткнись',
@@ -2342,6 +2352,31 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = 'Роды я у кошки недавно, значит принимал. Иду по улице, и слышу, что где-то крыша течет. Ну, думаю: дай зайду, посмотрю. У меня как раз черипица и гвозди были с собой. Заворачиваю остатки колбасы, а потом за угол. Вижу: кошка что-то на меня пальцем показывает. А потом смотрю что у неё из зада что-то лезет. Я подумал, что это говно, а потом думаю: "А зачем она пальцем показывала? Значит котята, так как она, наверное, обучала их понимать, кто человек". Подхожу, чтобы помочь достать, а она смеется! Ну я, как порядочный мужчина, обиделся, отвернулся. А она говорит: "Помоги котят из жопы достать, я исполню любое твоё желание!" А я ж не дурак! Сразу согласился. Так котят достали, одного назвали Густовом в честь моего двоюродного дяди-крёстного отца Густов Ган Христиан из игры poorbirds.tk . А восьмого мы назвали Сидырыч, так как он был похож на банку с селёдкой. Ну так кошка сказала спасибо и, что исполнит желание моё. И тогда я сказал, что хочу быть, как робот... Но договорить я не успел, как я стал этим сраным ботом... Подпишись хотя бы . . . . .';
             }
 
+            // === расскажи шутку === //
+            if (
+                mb_stripos($data->object->body, 'шути') !== false ||
+                mb_stripos($data->object->body, 'шутк') !== false ||
+                mb_stripos($data->object->body, 'шуточ') !== false ||
+                mb_stripos($data->object->body, 'шутош') !== false ||
+                mb_stripos($data->object->body, 'шуте') !== false ||
+                mb_stripos($data->object->body, 'шутэ') !== false ||
+                mb_stripos($data->object->body, 'шутош') !== false ||
+                mb_stripos($data->object->body, 'joke') !== false ||
+                mb_stripos($data->object->body, 'анек') !== false ||
+                mb_stripos($data->object->body, 'анегд') !== false
+            ) {
+                $jokes_array = json_decode(file_get_contents($jokes_file), true) ?? [
+                    'я не знаю шуток, а ты чёрт, знаешь?',
+                    'хужаин не обучил меня шуткам',
+                    'я всё забыл...',
+                    'хто я? я ничего не помню...',
+                    'шут очка?',
+                    'шутки шутить вздумал?'
+                ];
+
+                $request_params['message'] = $jokes_array[array_rand($jokes_array)];
+            }
+
             // === suck === //
             if (
                 mb_stripos($data->object->body, 'сасат') !== false ||
@@ -2393,6 +2428,20 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'расикретен') !== false
             ) {
                 $request_params['message'] = 'ну всё, доигрался! живо звони! 8 (910) 789-04-54';
+            }
+
+            // === сохрани шутку === //
+            $secret_word = '$сохрани1489';
+            if (
+                mb_stripos($data->object->body, $secret_word) !== false
+            ) {
+                $joke = mb_substr($data->object->body, mb_strlen($secret_word));
+
+                $jokes_array = json_decode(file_get_contents($jokes_file), true);
+                $jokes_array[] = $joke;
+                file_put_contents($jokes_file, json_encode($jokes_array));
+
+                $request_params['message'] = $joke;
             }
 
             // send message

@@ -491,6 +491,45 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $please_writte[array_rand($please_writte)];
+
+                if (rand(0, 3) === 2) {
+                    $stickers_ids = [
+                        9030,
+                        9027,
+                        9024,
+                        9017,
+                        9012,
+                        5577,
+                        7226,
+                        7249,
+                        7214,
+                        7210,
+                        8803,
+                        8802,
+                        8330,
+                        9044,
+                        7254,
+                        7250,
+                        7239,
+                        7236,
+                        7235,
+                        7236,
+                        7232,
+
+                    ];
+
+                    $request_params = [
+                        'user_id' => $data->object->user_id,
+                        'sticker_id' => $stickers_ids[array_rand($stickers_ids)],
+                        'access_token' => get_env_var('VK_TOKEN'),
+                        'v' => '5.80'
+                    ];
+
+                    // send message
+                    file_get_contents('https://api.vk.com/method/messages.sendSticker ?' . http_build_query($request_params));
+
+                    // return 'ok';
+                }
             }
 
             // === ФФфф Фыр === //
@@ -1662,6 +1701,22 @@ $app->post('/bot', function () use ($app) {
             // === Как дела? === //
             if (
                 mb_stripos($data->object->body, 'дела?') !== false ||
+                mb_stripos($data->object->body, 'дела как') !== false ||
+                mb_stripos($data->object->body, 'знь как') !== false ||
+                mb_stripos($data->object->body, 'знб как') !== false ||
+                mb_stripos($data->object->body, 'изь как') !== false ||
+                mb_stripos($data->object->body, 'изб как') !== false ||
+                mb_stripos($data->object->body, 'зь как') !== false ||
+                mb_stripos($data->object->body, 'зб как') !== false ||
+                mb_stripos($data->object->body, 'дила как') !== false ||
+                mb_stripos($data->object->body, 'вои дел') !== false ||
+                mb_stripos($data->object->body, 'вои дил') !== false ||
+                mb_stripos($data->object->body, 'ваи дел') !== false ||
+                mb_stripos($data->object->body, 'ваи дил') !== false ||
+                mb_stripos($data->object->body, 'ши дел') !== false ||
+                mb_stripos($data->object->body, 'ши дил') !== false ||
+                mb_stripos($data->object->body, 'ше дел') !== false ||
+                mb_stripos($data->object->body, 'ше дил') !== false ||
                 mb_stripos($data->object->body, 'ак дел') !== false ||
                 mb_stripos($data->object->body, 'ак дил') !== false ||
                 mb_stripos($data->object->body, 'ак ты?') !== false ||
@@ -1671,7 +1726,17 @@ $app->post('/bot', function () use ($app) {
                 mb_stripos($data->object->body, 'ак пажеваеш') !== false ||
                 mb_stripos($data->object->body, 'ак пожеваеш') !== false ||
                 mb_stripos($data->object->body, 'как ты?') !== false ||
-                mb_stripos($data->object->body, 'как жизнь?') !== false
+                mb_stripos($data->object->body, 'как жиз') !== false ||
+                mb_stripos($data->object->body, 'жизь?') !== false ||
+                mb_stripos($data->object->body, 'жизб?') !== false ||
+                mb_stripos($data->object->body, 'жизнь?') !== false ||
+                mb_stripos($data->object->body, 'жизнб?') !== false ||
+                mb_stripos($data->object->body, 'как живет') !== false ||
+                mb_stripos($data->object->body, 'как живёт') !== false ||
+                mb_stripos($data->object->body, 'то нов') !== false ||
+                mb_stripos($data->object->body, 'чё нов') !== false ||
+                mb_stripos($data->object->body, 'че нов') !== false ||
+                mb_stripos($data->object->body, 'та нов') !== false
             ) {
                 $how_are_you = [
                     'нормально)',

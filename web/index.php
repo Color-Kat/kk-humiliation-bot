@@ -1118,6 +1118,40 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $already_was[array_rand($already_was)];
             }
 
+            // === не повторяй === //
+            if (
+                mb_stripos($data->object->body, 'повторяеш') !== false ||
+                mb_stripos($data->object->body, 'повторяиш') !== false ||
+                mb_stripos($data->object->body, 'повтаряеш') !== false ||
+                mb_stripos($data->object->body, 'повтаряиш') !== false ||
+                mb_stripos($data->object->body, 'павторяеш') !== false ||
+                mb_stripos($data->object->body, 'павторяиш') !== false ||
+                mb_stripos($data->object->body, 'павтаряеш') !== false ||
+                mb_stripos($data->object->body, 'павтаряиш') !== false ||
+                mb_stripos($data->object->body, 'повторюша') !== false ||
+                mb_stripos($data->object->body, 'повтарюша') !== false ||
+                mb_stripos($data->object->body, 'павторюша') !== false ||
+                mb_stripos($data->object->body, 'павтарюша') !== false ||
+                mb_stripos($data->object->body, 'дя хрю') !== false
+            ) {
+                $do_not_repeat = [
+                    'хах, придумал чего, я сама оригинальность!',
+                    'чего? не может быть такого',
+                    'я сама оригинальность, а ты ' . $insults[$random_insult_number],
+                    'ну и ну, как же так получилось?',
+                    'это моё авторское высказывание, так что пасть захлопни',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                ];
+
+                $request_params['message'] = $do_not_repeat[array_rand($do_not_repeat)];
+            }
+
             // ============= неважные фразы ============= //    
 
 
@@ -1891,6 +1925,24 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $arrows[array_rand($arrows)];
+            }
+
+            // === 150 === //
+            if (
+                mb_stripos($data->object->body, '150') !== false ||
+                mb_stripos($data->object->body, 'сто п') !== false ||
+                mb_stripos($data->object->body, 'стопи') !== false ||
+                mb_stripos($data->object->body, 'стопя') !== false
+            ) {
+                $hundred_fifty = [
+                    'ты мне столько должен заплатить',
+                    'эту сумму ты можешь мне задонатить',
+                    'хах, а ты юморист) лучше бы ты мне столько задонатил',
+                    'у меня донат работает - закинь эту сумму туда)',
+                    'будет сумма, которую ты должен мне задонатить'
+                ];
+
+                $request_params['message'] = $hundred_fifty[array_rand($hundred_fifty)];
             }
 
             // === 300 === //

@@ -2531,6 +2531,24 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $jokes_array[array_rand($jokes_array)];
             }
 
+            // === пользователь переслал сообщение === //
+            if (
+                $data->object->fwd_messages
+            ) {
+                $fwd_message = [
+                    'в жопу себе перешли сообщение',
+                    'это не моё!',
+                    'не, не, это не моё, я чист и не винен',
+                    'это чьё? эт не моё, я не виноват',
+                    'ну, это же статья',
+                    'и чё? в жопу перешли это',
+                    'в жопу себе перешли',
+                    'мамке в жопу перешли',
+                ];
+
+                $request_params['message'] = $fwd_message[array_rand($fwd_message)];
+            }
+
             // === suck === //
             if (
                 mb_stripos($data->object->body, 'сасат') !== false ||

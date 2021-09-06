@@ -514,8 +514,7 @@ $app->post('/bot', function () use ($app) {
                         7236,
                         7235,
                         7236,
-                        7232,
-
+                        7232
                     ];
 
                     $request_params = [
@@ -786,7 +785,6 @@ $app->post('/bot', function () use ($app) {
                     'в',
                     'В',
                     'в - вор',
-                    'в - ',
                 ];
 
                 $request_params['message'] = $alphabet_c[array_rand($alphabet_c)];
@@ -2545,11 +2543,13 @@ $app->post('/bot', function () use ($app) {
             ) {
                 $joke = mb_substr($data->object->body, mb_strlen($secret_word));
 
-                $jokes_array = json_decode(file_get_contents($jokes_file), true);
-                $jokes_array[] = $joke;
-                file_put_contents($jokes_file, json_encode($jokes_array));
+                if ($joke) {
+                    $jokes_array = json_decode(file_get_contents($jokes_file), true);
+                    $jokes_array[] = $joke;
+                    file_put_contents($jokes_file, json_encode($jokes_array));
 
-                $request_params['message'] = $joke;
+                    $request_params['message'] = $joke;
+                }
             }
 
             // send message

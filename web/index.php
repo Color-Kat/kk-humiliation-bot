@@ -97,6 +97,10 @@ $app->post('/bot', function () use ($app) {
                 'тупой',
                 'срань',
                 'засранец',
+                'жирная слониха',
+                'перфоратор',
+                'жмурик',
+                'беззубый',
                 'свинья',
                 'жертва аборта',
                 'высер',
@@ -1832,6 +1836,29 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $what_say[array_rand($what_say)];
             }
 
+             // === что скажешь? === //
+             if (
+                mb_stripos($data->object->body, 'о дума') !== false ||
+                mb_stripos($data->object->body, 'о думо') !== false ||
+                mb_stripos($data->object->body, 'думаеш') !== false ||
+                mb_stripos($data->object->body, 'думаиш') !== false ||
+                mb_stripos($data->object->body, 'думоеш') !== false ||
+                mb_stripos($data->object->body, 'думоиш') !== false
+            ) {
+                $what_do_you_think = [
+                    'ничего не думаю',
+                    'думаю, что ты ' . $insults[$random_insult_number],
+                    'кто бы мог подумать...',
+                    'в наше время мало кто думает...',
+                    'я не думаю, я знаю, что ты ' . $insults[$random_insult_number],
+                    'не понял, что я думаю? я думаю, что ты ' . $insults[$random_insult_number],
+                    'я просто думаю',
+                    "...размышляю...размышляю...\nты " . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $what_do_you_think[array_rand($what_do_you_think)];
+            }
+
             // === школа === //
             if (
                 mb_stripos($data->object->body, 'школа') !== false ||
@@ -2348,6 +2375,23 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $do_you_know[array_rand($do_you_know)];
+            }
+
+             // === запомню === //
+             if (
+                mb_stripos($data->object->body, 'помн') !== false
+            ) {
+                $remember = [
+                    'забыл, блин',
+                    'забудь',
+                    'забыл',
+                    'запомни - я это не запомню',
+                    'так, забыли',
+                    'я забыл что-то, аа, вспомнил - ты ' . $insults[$random_insult_number],
+                    'не помню уже'
+                ];
+
+                $request_params['message'] = $remember[array_rand($remember)];
             }
 
             // ======== LONG TEXT ========= //

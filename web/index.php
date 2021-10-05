@@ -1934,6 +1934,38 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $ass_smell[array_rand($ass_smell)];
             }
 
+            // === сейчас? === //
+            if (
+                mb_stripos($data->object->body, 'сейчас') !== false ||
+                mb_stripos($data->object->body, 'сичас') !== false ||
+                mb_stripos($data->object->body, 'сечас') !== false ||
+                mb_stripos($data->object->body, 'сийчас') !== false ||
+                mb_stripos($data->object->body, 'щас') !== false ||
+                mb_stripos($data->object->body, 'завтра') !== false ||
+                mb_stripos($data->object->body, 'вчера') !== false ||
+                mb_stripos($data->object->body, 'данный момент') !== false ||
+                mb_stripos($data->object->body, 'даный момент') !== false ||
+                mb_stripos($data->object->body, 'данный мамент') !== false ||
+                mb_stripos($data->object->body, 'даный мамент') !== false
+            ) {
+                $right_now = [
+                    'нет, блин, завтра',
+                    'а когда ж еще?',
+                    'да прямо сейчас',
+                    'сейчас же!',
+                    'да, сейчас, ' . $insults[$random_insult_number],
+                    'RIGHT NOW!',
+                    'прямо сейчас',
+                    'в данный момент ты ' . $insults[$random_insult_number],
+                    'нет, блин, вчера!',
+                    'ну не завтра ж!',
+                    'ну не послезавтра же',
+                    'нет, ты всегда ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $right_now[array_rand($right_now)];
+            }
+
             // === что делаешь? === //
             if (
                 mb_stripos($data->object->body, 'что делаешь?') !== false ||
@@ -1983,14 +2015,25 @@ $app->post('/bot', function () use ($app) {
 
             // === почему === //
             if (
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false ||
-                mb_stripos($data->object->body, '') !== false
+                mb_stripos($data->object->body, 'почему') !== false ||
+                mb_stripos($data->object->body, 'пачему') !== false ||
+                mb_stripos($data->object->body, 'почиму') !== false ||
+                mb_stripos($data->object->body, 'пачиму') !== false ||
+                mb_stripos($data->object->body, ' стати') !== false ||
+                mb_stripos($data->object->body, 'с тати') !== false ||
+                mb_stripos($data->object->body, 'уяли') !== false ||
+                mb_stripos($data->object->body, 'уяле') !== false ||
+                mb_stripos($data->object->body, 'ренали') !== false ||
+                mb_stripos($data->object->body, 'ринали') !== false ||
+                mb_stripos($data->object->body, 'чего бы') !== false ||
+                mb_stripos($data->object->body, 'чиго бы') !== false ||
+                mb_stripos($data->object->body, 'чево бы') !== false ||
+                mb_stripos($data->object->body, 'чиво бы') !== false ||
+                mb_stripos($data->object->body, 'какого перепуга') !== false ||
+                mb_stripos($data->object->body, 'каково перепуга') !== false ||
+                mb_stripos($data->object->body, 'какого перипуга') !== false ||
+                mb_stripos($data->object->body, 'каково перипуга') !== false ||
+                mb_stripos($data->object->body, 'поч') !== false ?? mb_strlen($data->object->body) === 3
             ) {
                 $why = [
                     'почемууууу',
@@ -2010,7 +2053,6 @@ $app->post('/bot', function () use ($app) {
 
                 $request_params['message'] = $why[array_rand($why)];
             }
-
 
             // === СТРЕЛКИ ПЕРЕВОДИШЬ === //
             if (

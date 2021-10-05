@@ -540,7 +540,7 @@ $app->post('/bot', function () use ($app) {
                         'user_id' => $data->object->user_id,
                         'sticker_id' => $stickers_ids[array_rand($stickers_ids)],
                         'access_token' => get_env_var('VK_TOKEN'),
-                        'v' => '5.80'
+                        'v' => '5.81'
                     ];
 
                     // send message
@@ -1836,8 +1836,8 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $what_say[array_rand($what_say)];
             }
 
-             // === что скажешь? === //
-             if (
+            // === что скажешь? === //
+            if (
                 mb_stripos($data->object->body, 'о дума') !== false ||
                 mb_stripos($data->object->body, 'о думо') !== false ||
                 mb_stripos($data->object->body, 'думаеш') !== false ||
@@ -1857,6 +1857,38 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $what_do_you_think[array_rand($what_do_you_think)];
+            }
+
+            // === дай совет === //
+            if (
+                mb_stripos($data->object->body, 'совет') !== false ||
+                mb_stripos($data->object->body, 'савет') !== false ||
+                mb_stripos($data->object->body, 'рикамен') !== false ||
+                mb_stripos($data->object->body, 'рекомин') !== false ||
+                mb_stripos($data->object->body, 'рекамен') !== false ||
+                mb_stripos($data->object->body, 'рикамен') !== false ||
+                mb_stripos($data->object->body, 'рикамин') !== false ||
+                mb_stripos($data->object->body, 'рикомен') !== false ||
+                mb_stripos($data->object->body, 'рикомин') !== false
+            ) {
+                $advice = [
+                    'думаю, что ты ' . $insults[$random_insult_number],
+                    'тебе нужно подстричься',
+                    'тебе нужно переодется, так как от тебя пахнет',
+                    'я бы порекомендовал тебе открыть брокерский счет',
+                    'сбросься с крыши',
+                    'послушай ЛСП и упади с крыши',
+                    'Гриша всегда рекомендовал людям играть в poorbirds.tk',
+                    'совет да любовь!',
+                    'совет тебе не поможет, ты ' . $insults[$random_insult_number],
+                    'стань как я, интеллигентом',
+                    'прими религию святого Густова!',
+                    'стань приверженцем ГУСТИНИАНСТВА!!!',
+                    'чтобы что-то получить, сначала отдай это. купи подписку Vk Donut на Гришу',
+                    'ты молодчина, всё у тебя будет хорошо, подпишись на группу и Святой Густов смилуется надо тобой',
+                ];
+
+                $request_params['message'] = $advice[array_rand($advice)];
             }
 
             // === школа === //
@@ -1948,6 +1980,37 @@ $app->post('/bot', function () use ($app) {
 
                 $request_params['message'] = $what_doing[array_rand($what_doing)];
             }
+
+            // === почему === //
+            if (
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false ||
+                mb_stripos($data->object->body, '') !== false
+            ) {
+                $why = [
+                    'почемууууу',
+                    'патаму',
+                    'потому',
+                    'по качану',
+                    'по-барабану',
+                    'и?',
+                    'по этому ты ' . $insults[$random_insult_number],
+                    'просто я так решил',
+                    'я решил, значит так и будет',
+                    'так решил сам Свято Густов',
+                    'потому что ты ВОНЮЧКА!!!!!',
+                    'это присходит, так как ты ' . $insults[$random_insult_number],
+                    'бывают в жизни огорчения, можешь поросить у меня совет, я помогу)',
+                ];
+
+                $request_params['message'] = $why[array_rand($why)];
+            }
+
 
             // === СТРЕЛКИ ПЕРЕВОДИШЬ === //
             if (
@@ -2377,8 +2440,8 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $do_you_know[array_rand($do_you_know)];
             }
 
-             // === запомню === //
-             if (
+            // === запомню === //
+            if (
                 mb_stripos($data->object->body, 'помн') !== false
             ) {
                 $remember = [

@@ -2261,6 +2261,23 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $witty[array_rand($witty)];
             }
 
+            // === запомню === //
+            if (
+                mb_stripos($data->object->body, 'помн') !== false
+            ) {
+                $remember = [
+                    'забыл, блин',
+                    'забудь',
+                    'забыл',
+                    'запомни - я это не запомню',
+                    'так, забыли',
+                    'я забыл что-то, аа, вспомнил - ты ' . $insults[$random_insult_number],
+                    'не помню уже'
+                ];
+
+                $request_params['message'] = $remember[array_rand($remember)];
+            }
+
             // ======== LONG TEXT ========= //
             if (
                 mb_strlen($data->object->body) > 59

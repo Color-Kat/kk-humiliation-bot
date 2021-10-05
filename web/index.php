@@ -1,6 +1,8 @@
 <?php
 require('../vendor/autoload.php');
 
+use FormulaParser\FormulaParser;
+
 function get_env_var($var)
 {
     $config = json_decode(file_get_contents('./config.json'), true);
@@ -2261,6 +2263,57 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $witty[array_rand($witty)];
             }
 
+            // === математика === //
+            if (
+                mb_stripos($data->object->body, '+') !== false ||
+                mb_stripos($data->object->body, 'реши') !== false ||
+                mb_stripos($data->object->body, 'матим') !== false ||
+                mb_stripos($data->object->body, 'матеша') !== false ||
+                mb_stripos($data->object->body, 'матеща') !== false ||
+                mb_stripos($data->object->body, 'метрия') !== false ||
+                mb_stripos($data->object->body, 'геомет') !== false ||
+                mb_stripos($data->object->body, 'геамет') !== false ||
+                mb_stripos($data->object->body, 'счита') !== false ||
+                mb_stripos($data->object->body, 'щитай') !== false ||
+                mb_stripos($data->object->body, 'счет') !== false ||
+                mb_stripos($data->object->body, 'щет') !== false ||
+                mb_stripos($data->object->body, 'щёт') !== false
+            ) {
+                $math = $data->object->body;
+                // $math = preg_replace('/([0-9\(\)\*\-\+\/\.]*)/i', '\\1', $math);
+                $math = preg_replace("/[^0-9\(\)\*\÷\-\+\/\.]/", '', $math);
+
+                try {
+                    $parser = new FormulaParser($math, 3);
+                    $result = $parser->getResult()[1]; // [0 => 'done', 1 => result]
+
+                    if (!is_numeric($result)) $result = "хрень какая-то получилась";
+                } catch (\Exception $e) {
+                    $result = "хрень какая-то получилась";
+                }
+
+                $solve = [
+                    'сам считай',
+                    'это уже эксплоатация роботов!',
+                    'а ловко ты это придумал, но я всё понял, поэтому решай сам',
+                    'ага, я очень силён в математике)',
+                    'это просто, ты тупой)',
+                    'чему детей в школе учат...',
+                    'раньше учили лучше...',
+                    'куда катится мир, даже это не могут...',
+                    'эт ж просто, сам попробуй',
+                    $result,
+                    "с тебя шоколадка - $result",
+                    "$result \n оформи подписку vk Donut, 
+                    чтобы отблагодарить меня. хотя ты же " . $insults[$random_insult_number],
+                    "а кто мне за это заплатит?",
+                    "а кто мне за это заплатит? у тебя есть бухгалтер?",
+                    "вот твоё решение: $result"
+                ];
+
+                $request_params['message'] = $solve[array_rand($solve)];
+            }
+
             // === запомню === //
             if (
                 mb_stripos($data->object->body, 'помн') !== false
@@ -2276,6 +2329,25 @@ $app->post('/bot', function () use ($app) {
                 ];
 
                 $request_params['message'] = $remember[array_rand($remember)];
+            }
+
+            // === знаешь === //
+            if (
+                mb_stripos($data->object->body, 'наеш') !== false ||
+                mb_stripos($data->object->body, 'наиш') !== false ||
+                mb_stripos($data->object->body, 'зна') !== false
+            ) {
+                $do_you_know = [
+                    'не знаю',
+                    'не знаю, а ты знаешь?',
+                    'я забыл((',
+                    'сам-то знаешь?',
+                    'ученье - свет, неученье - тема, а ты - ' . $insults[$random_insult_number],
+                    'знать не запретишь',
+                    'теперь знаю, что ты ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $do_you_know[array_rand($do_you_know)];
             }
 
             // ======== LONG TEXT ========= //

@@ -1197,14 +1197,14 @@ $app->post('/bot', function () use ($app) {
 
              // === проснулся === //
              if (
-                mb_stripos($data->object->body, 'что') !== false && mb_stripos($data->object->body) == 3  ||
+                mb_stripos($data->object->body, 'что') !== false && mb_strlen($data->object->body) == 3  ||
                 mb_stripos($data->object->body, 'что?') !== false ||
-                mb_stripos($data->object->body, 'шта') !== false && mb_stripos($data->object->body) == 3 ||
+                mb_stripos($data->object->body, 'шта') !== false && mb_strlen($data->object->body) == 3 ||
                 mb_stripos($data->object->body, 'шта?') !== false ||
-                mb_stripos($data->object->body, 'чего') !== false  && mb_stripos($data->object->body) == 4 ||
-                mb_stripos($data->object->body, 'чево') !== false  && mb_stripos($data->object->body) == 4 ||
-                mb_stripos($data->object->body, 'чиго') !== false  && mb_stripos($data->object->body) == 4 ||
-                mb_stripos($data->object->body, 'чиво') !== false  && mb_stripos($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чего') !== false  && mb_strlen($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чево') !== false  && mb_strlen($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чиго') !== false  && mb_strlen($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чиво') !== false  && mb_strlen($data->object->body) == 4 ||
                 mb_stripos($data->object->body, 'чего?') !== false ||
                 mb_stripos($data->object->body, 'чево?') !== false ||
                 mb_stripos($data->object->body, 'чиго?') !== false ||

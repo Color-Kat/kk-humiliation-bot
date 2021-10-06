@@ -1195,6 +1195,41 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $do_not_repeat[array_rand($do_not_repeat)];
             }
 
+             // === проснулся === //
+             if (
+                mb_stripos($data->object->body, 'что') !== false && mb_stripos($data->object->body) == 3  ||
+                mb_stripos($data->object->body, 'что?') !== false ||
+                mb_stripos($data->object->body, 'шта') !== false && mb_stripos($data->object->body) == 3 ||
+                mb_stripos($data->object->body, 'шта?') !== false ||
+                mb_stripos($data->object->body, 'чего') !== false  && mb_stripos($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чево') !== false  && mb_stripos($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чиго') !== false  && mb_stripos($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чиво') !== false  && mb_stripos($data->object->body) == 4 ||
+                mb_stripos($data->object->body, 'чего?') !== false ||
+                mb_stripos($data->object->body, 'чево?') !== false ||
+                mb_stripos($data->object->body, 'чиго?') !== false ||
+                mb_stripos($data->object->body, 'чиво?') !== false
+            ) {
+                $nothing = [
+                    'что слышал',
+                    'ниче',
+                    'а то, что ты '. $insults[$random_insult_number],
+                    'что? что слышал, '. $insults[$random_insult_number],
+                    'глухой?',
+                    'слепой?',
+                    'а ты ослеп?',
+                    'в уши долбишься?',
+                    'глазки свои проверь, пожалуйста',
+                    'земки совсем перестали глядеть?',
+                    'ушки прочисти, пожалуйста, '. $insults[$random_insult_number],
+                    'мамка глаза выколола?',
+                    'перепрочитай предыдущее сообщение!',
+                    'ну и туп же ты, можно перепрочитать просто, '. $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $nothing[array_rand($nothing)];
+            }
+
             // ============= неважные фразы ============= //    
 
 

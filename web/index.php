@@ -2583,6 +2583,51 @@ $app->post('/bot', function () use ($app) {
                 $request_params['message'] = $remember[array_rand($remember)];
             }
 
+            // === аргумент === //
+            if (
+                mb_stripos($data->object->body, 'арг') !== false ||
+                mb_stripos($data->object->body, 'оргу') !== false
+            ) {
+                $argument = [
+                    'аргумент не нужен, ты ' . $insults[$random_insult_number],
+                    'обойдёшься без аргументов',
+                    'я отказываюсь давать комментарии черту',
+                    'я не буду давать показания!',
+                    'встретимся в суде, ' . $insults[$random_insult_number],
+                    'я на тебя в суд подам, там расставят все точки над твоей мамкой',
+                    'я на тебя в суд пожалуюсь, там тебе всё объяснят',
+                    'поверь - за аргументом далеко ходить не надо)',
+                    'я тебе не мент',
+                    'по этому поводу у меня есть 7912 аргументов, позвони по номеру моему юристу 8 (846) 278-14-44 чтобы услышать их (юрист тоже бот)',
+                    'ты '. $insults[$random_insult_number]. ' без аргументов!',
+                    'а чего аргументировать, ты и сам знаешь, что ты ' . $insults[$random_insult_number],
+                ];
+
+                $request_params['message'] = $argument[array_rand($argument)];
+            }
+
+              // === аргумент === //
+              if (
+                mb_stripos($data->object->body, 'пруф') !== false ||
+                mb_stripos($data->object->body, 'аруф') !== false ||
+                mb_stripos($data->object->body, 'пруы') !== false ||
+                mb_stripos($data->object->body, 'пркф') !== false
+            ) {
+                $proofs = [
+                    'пруфануть тебе роже?',
+                    'пруфы можешь у моего юриста попросить - 278-13-54',
+                    'именно для этого у меня и есть собственный юрист - 8 (834) 229-77-88',
+                    'какие пруфы? ты ' . $insults[$random_insult_number] . ' и точка!',
+                    'без пруфов проживешь',
+                    '"пруфанем немножечко"',
+                    'иди-ка ты в жопу, а пруфы там и найдешь',
+                    'без пруфов проживешь',
+                    'я для тебя тут язык бить не собираюсь, без пруфов обойдешься'
+                ];
+
+                $request_params['message'] = $proofs[array_rand($proofs)];
+            }
+
             // ======== LONG TEXT ========= //
             if (
                 mb_strlen($data->object->body) > 59

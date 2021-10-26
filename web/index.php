@@ -35,7 +35,7 @@ $app->get('/', function () use ($app) {
     return 'heroku is the bad hosting';
 });
 
-$app->post('/bot', function () use ($app) {
+$app->post('/humiliationBot', function () use ($app) {
     $data = json_decode(file_get_contents('php://input'));
     $jokes_file = './jokes.json';
 
